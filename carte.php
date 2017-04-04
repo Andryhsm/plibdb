@@ -66,7 +66,15 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             {
                 display: none;
                 cursor: pointer;
-            }</style><!-- <meta name="vfb" version="2.9.2" /> -->
+            }
+
+            #map {
+                margin: 0% 2% 0% 2%;
+                width: 95vw;
+                height: 80vh;
+                background: yellow;
+            }
+            </style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
@@ -130,7 +138,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
 
-                    djfsugfk sdfkud fksudfk sd
+                    <div id="map"></div>
 
                 </section>
 
@@ -160,6 +168,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             /* ]]> */
         </script>
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
+
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&callback=initMap" async defer></script>
         <script type="text/javascript">
             $(document).ready(function ()
             {
@@ -177,6 +187,45 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 else
                     $('#returnOnTop').fadeIn();
             });
+        </script>
+        <script type="text/javascript">
+             var map;
+
+         
+                function initMap() {
+                  map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -34.397, lng: 150.644},
+                    zoom: 6
+                  });
+                  var infoWindow = new google.maps.InfoWindow({map: map});
+
+                  // Try HTML5 geolocation.
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                      var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                      };
+
+                      infoWindow.setPosition(pos);
+                      infoWindow.setContent('Location found.');
+                      map.setCenter(pos);
+                    }, function() {
+                      handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                  } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                  }
+                }
+
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                  infoWindow.setPosition(pos);
+                  infoWindow.setContent(browserHasGeolocation ?
+                                        'Error: The Geolocation service failed.' :
+                                        'Error: Your browser doesn\'t support geolocation.');
+                }
+
         </script>
     </body>
 </html>

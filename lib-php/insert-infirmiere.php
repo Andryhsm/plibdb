@@ -19,6 +19,7 @@ $type_soin2 = htmlspecialchars($_POST['type-soin2']);
 $type_soin3 = htmlspecialchars($_POST['type-soin3']);
 $type_soin4 = htmlspecialchars($_POST['type-soin4']);
 $lieu_intervention = $_POST['lieu-intervention'];
+$latLng = $_POST['latLng'];
 
 $mdp = utf8_decode($mdp);
 $conf_mdp = utf8_decode($conf_mdp);
@@ -34,6 +35,7 @@ $type_soin2 = utf8_decode($type_soin2);
 $type_soin3 = utf8_decode($type_soin3);
 $type_soin4 = utf8_decode($type_soin4);
 $lieu_intervention = utf8_decode($lieu_intervention);
+$latLng = utf8_decode($latLng);
 
 $dossier = '../image-person/';
 
@@ -53,7 +55,7 @@ if ($fichier == "") {
 
             $inf = $reponse->fetch();
 
-            $bdd->exec("INSERT INTO `infirmiere` (`photo`,`nomI`,`prenomI`,`emailI`,`mdpI`,`telI`,`rueI`,`code-postalI`,`villeI`,`type-soinI1`,`type-soinI2`,`type-soinI3`,`type-soinI4`,`lieu-intervention`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$lieu_intervention')") or die(print_r($bdd->ErrorInfo()));
+            $bdd->exec("INSERT INTO `infirmiere` (`photo`,`nomI`,`prenomI`,`emailI`,`mdpI`,`telI`,`rueI`,`code-postalI`,`villeI`,`type-soinI1`,`type-soinI2`,`type-soinI3`,`type-soinI4`,`lieu-intervention`, `latLng`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$lieu_intervention','$latLng')") or die(print_r($bdd->ErrorInfo()));
 
             $_SESSION['email'] = $email;
             $_SESSION['nomI'] = $nom;
@@ -68,6 +70,7 @@ if ($fichier == "") {
             $_SESSION['type-soinI4'] = $type_soin4;
             $_SESSION['lieu-intervention'] = $lieu_intervention;
             $_SESSION['photo'] = $fichier;
+            $_SESSION['latLng'] = $latLng;
             echo 'succes';
         } else
             echo "Mot de passe non identique";
@@ -102,7 +105,7 @@ if ($fichier == "") {
 
                     $inf = $reponse->fetch();
 
-                    $bdd->exec("INSERT INTO `infirmiere` (`photo`,`nomI`,`prenomI`,`emailI`,`mdpI`,`telI`,`rueI`,`code-postalI`,`villeI`,`type-soinI1`,`type-soinI2`,`type-soinI3`,`type-soinI4`,`lieu-intervention`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$lieu_intervention')") or die(print_r($bdd->ErrorInfo()));
+                    $bdd->exec("INSERT INTO `infirmiere` (`photo`,`nomI`,`prenomI`,`emailI`,`mdpI`,`telI`,`rueI`,`code-postalI`,`villeI`,`type-soinI1`,`type-soinI2`,`type-soinI3`,`type-soinI4`,`lieu-intervention`, `latLng`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$lieu_intervention','$latLng')") or die(print_r($bdd->ErrorInfo()));
 
                     $_SESSION['email'] = $email;
                     $_SESSION['nomI'] = $nom;
@@ -117,6 +120,7 @@ if ($fichier == "") {
                     $_SESSION['type-soinI4'] = $type_soin4;
                     $_SESSION['lieu-intervention'] = $lieu_intervention;
                     $_SESSION['photo'] = $fichier;
+                    $_SESSION['latLng'] = $latLng;
                     echo 'succes';
                 } else
                     echo "Mot de passe non identique";
