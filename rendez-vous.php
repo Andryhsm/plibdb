@@ -1,10 +1,13 @@
-<?php 
-    session_start();
-    if((!isset($_SESSION['email'])) || (empty($_SESSION['email'])))
-    {
-        header("Location: login.html");
-    }
- ?>
+<?php
+session_start();
+if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
+    header("Location: login.html");
+}
+include_once "./lib-php/cnx.php";
+
+$req = $bdd->query("SELECT * FROM liste_demande WHERE status = 'accepter'");
+$data = $req->fetch();
+?>
 
 <!DOCTYPE html>
 <html lang="fr-FR" class="no-js">
@@ -13,7 +16,7 @@
 
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     
+
         <title>liste de demande</title>
 
         <meta name="robots" content="noindex,follow">
@@ -26,18 +29,18 @@
         <link rel="stylesheet" id="wds_font-awesome-css" href="./others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
-        
+
         <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
-        <script type="text/javascript">     
+        <script type="text/javascript">
             /* <![CDATA[ */
             var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
             /* ]]> */
         </script>
 
         <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-        
-        
+
+
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
         <meta property="og:title" content="Alchem">
@@ -55,18 +58,18 @@
             }
             .btn_up
             {
-              position: fixed;
-              bottom: 10px;
-              right: 15px;
-              height: 80px;
-              width: 80px;
-              padding: 0;
+                position: fixed;
+                bottom: 10px;
+                right: 15px;
+                height: 80px;
+                width: 80px;
+                padding: 0;
             }
 
             #returnOnTop
             {
-              display: none;
-              cursor: pointer;
+                display: none;
+                cursor: pointer;
             }</style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
         </style></head>
@@ -79,8 +82,8 @@
                     <div class="main-header " style="display: block;">
                         <div class="container">
                             <div class="logo-box alchem_header_style alchem_default_logo">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                
+                                <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
+
                             </div>
                             <button class="site-nav-toggle">
                                 <span class="sr-only">Toggle navigation</span>
@@ -104,7 +107,7 @@
                                 <a href="#">
                                     <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
                                 </a>
-                                
+
                             </div>
                             <button class="site-nav-toggle">
                                 <span class="sr-only">Toggle navigation</span>
@@ -128,17 +131,68 @@
             <div id="alchem-home-sections">
 
 
-                <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
+                <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
+                    <div class="section-content">
+                        <div class="container alchem_section_4_model">
 
-                    djfsugfk sdfkud fksudfk sd
 
+                            <?php if ($data) { ?>
+                                <table class="table table-hover">
+                                    <tbody id="content">
+                                        
+                                        <tr>
+                                            <td width='15%'>
+                                                <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                            </td>
+                                            <td width='45%'>
+                                                <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+                                                <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                            </td>
+                                            <td width='40%'>
+                                                <br><br>
+                                                <?php echo($data['commentaire']); ?>
+                                                <br><br>
+                                                <a id="itineraire" class="btn btn-success" href="#">Itineraire</a>
+                                                <a id="terminer" class="btn btn-danger" href="./lib-php/edit3.php?id='<?php echo($data['id']); ?>'">Terminer</a>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                <?php
+                            } else {
+                                echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                            }
+                            ?>
+
+                        </div>
+                    </div>
                 </section>
 
+                <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror"></button>
+                <div class="modal" id="loginerror">
+                    <div class="modal-dialog">
+                        <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
+                                <h4 class="modal-title" style="text-align: center;">Erreur !</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="warning" id="erreur_inscription"></div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-                    <div class="btn_up">
-                      <img src="img/retour-en-haut.png" class="img-responsive" id="returnOnTop">
-                    </div>
+            <div class="btn_up">
+                <img src="img/retour-en-haut.png" class="img-responsive" id="returnOnTop">
+            </div>
 
             <!--Footer-->
             <footer class="">
@@ -146,36 +200,68 @@
                     <div class="container text-center alchem_footer_social_icon_1"> 
                         <div class="clearfix"></div>
                         <div class="site-info">
-                        <a href="#" >OUSOFT SAS</a>. 38 Rue de la convention, 94270, Le Kremlin-Bicêtre.</div>
+                            <a href="#" >OUSOFT SAS</a>. 38 Rue de la convention, 94270, Le Kremlin-Bicêtre.</div>
                     </div>
                 </div>          
             </footer>
         </div>  
-                        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript">
-                                    /* <![CDATA[ */
-                                    var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
-                                    /* ]]> */
-        </script>
+
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
         <script type="text/javascript">
-          $(document).ready( function () 
-          {
-            $('#returnOnTop').hide();
-            $('#returnOnTop').click( function() {
-                //e.preventDefault();
-                $('html,body').animate({scrollTop: 0}, 'slow');
-            });
-          });
+            $('#terminer').click(function (e)
+            {
+                e.preventDefault();
 
-          $(window).scroll(function() 
-          {
-              if ( $(window).scrollTop() == 0 )
-                  $('#returnOnTop').fadeOut();
-              else
-                  $('#returnOnTop').fadeIn();
-          });
+                var form = $('#form-filter').get(0);
+                var formData = new FormData(form);// get the form data
+                // on envoi formData vers mail.php
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'lib-php/edit3.php?id=\'<?php echo($data['id']); ?>\'', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'text', // what type of data do we expect back from the server
+                    processData: false,
+                    contentType: false,
+                    success: function (server_response)
+                    {
+                        if (server_response === "reussi")
+                        {
+                            window.location.replace("rendez-vous.php");
+                        }
+                        else
+                        {
+                            $('#erreur_inscription').html('<p>' + server_response + '</p>');
+                            $('#triggerwarning').trigger('click');
+                            setTimeout(function () {
+                                $('#ferme').trigger('click');
+                            }, 4000);
+                        }
+                    },
+                    error: function (server_response)
+                    {
+                        alert(server_response);
+                    }
+                });
+            });
+
+            $(document).ready(function ()
+            {
+                $('#returnOnTop').hide();
+                $('#returnOnTop').click(function () {
+                    //e.preventDefault();
+                    $('html,body').animate({scrollTop: 0}, 'slow');
+                });
+            });
+
+            $(window).scroll(function ()
+            {
+                if ($(window).scrollTop() == 0)
+                    $('#returnOnTop').fadeOut();
+                else
+                    $('#returnOnTop').fadeIn();
+            });
         </script>
     </body>
 </html>

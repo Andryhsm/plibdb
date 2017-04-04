@@ -3,6 +3,10 @@ session_start();
 if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
     header("Location: login.html");
 }
+include_once "./lib-php/cnx.php";
+
+$req = $bdd->query("SELECT * FROM liste_demande WHERE status = 'attente'");
+$data = $req->fetch();
 ?>
 
 
@@ -128,14 +132,63 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             <div id="alchem-home-sections">
 
 
-                <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
+                <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
+                    <div class="section-content">
+                        <div class="container alchem_section_4_model">
 
-                    djfsugfk sdfkud fksudfk sd
 
+                            <?php if ($data) { ?>
+                                <table class="table table-hover">
+                                    <tbody id="content">
+                                        <tr>
+                                            <td width='15%'>
+                                                <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                            </td>
+                                            <td width='45%'>
+                                                <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+                                                <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                            </td>
+                                            <td width='40%'>
+                                                <br><br>
+                                                <?php echo($data['commentaire']); ?>
+                                                <br><br>
+                                                <a id="accepter" class="btn btn-success" href="./lib-php/edit.php?id='<?php echo($data['id']); ?>'">Accepter</a>
+                                                <a id="refuser" class="btn btn-danger" href="./lib-php/edit1.php?id='<?php echo($data['id']); ?>'">Réfuser</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <?php
+                            } else {
+                                echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
+                            }
+                            ?>
+
+                        </div>
+                    </div>
                 </section>
-
-
             </div>
+
+            <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror"></button>
+            <div class="modal" id="loginerror">
+                <div class="modal-dialog">
+                    <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
+                            <h4 class="modal-title" style="text-align: center;">Erreur !</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="warning" id="erreur_inscription"></div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="btn_up">
                 <img src="img/retour-en-haut.png" class="img-responsive" id="returnOnTop">
             </div>
@@ -151,15 +204,80 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 </div>          
             </footer>
         </div>  
-        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+        <script type="text/javascript" src="./js/jquery.js"></script>
         <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
-            /* ]]> */
-        </script>
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
         <script type="text/javascript">
+            $('#accepter').click(function (e)
+            {
+                e.preventDefault();
+
+                var form = $('#form-filter').get(0);
+                var formData = new FormData(form);// get the form data
+                // on envoi formData vers mail.php
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'lib-php/edit.php?id=\'<?php echo($data['id']); ?>\'', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'text', // what type of data do we expect back from the server
+                    processData: false,
+                    contentType: false,
+                    success: function (server_response)
+                    {
+                        if (server_response === "reussi")
+                        {
+                            window.location.replace("liste.php");
+                        }
+                        else
+                        {
+                            $('#erreur_inscription').html('<p>' + server_response + '</p>');
+                            $('#triggerwarning').trigger('click');
+                            setTimeout(function () {
+                                $('#ferme').trigger('click');
+                            }, 4000);
+                        }
+                    },
+                    error: function (server_response)
+                    {
+                        alert(server_response);
+                    }
+                });
+            });
+            $('#refuser').click(function (e)
+            {
+                e.preventDefault();
+
+                var form = $('#form-filter').get(0);
+                var formData = new FormData(form);// get the form data
+                // on envoi formData vers mail.php
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: 'lib-php/edit1.php?id=\'<?php echo($data['id']); ?>\'', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'text', // what type of data do we expect back from the server
+                    processData: false,
+                    contentType: false,
+                    success: function (server_response)
+                    {
+                        if (server_response === "reussi")
+                        {
+                            window.location.replace("liste.php");
+                        }
+                        else
+                        {
+                            $('#erreur_inscription').html('<p>' + server_response + '</p>');
+                            $('#triggerwarning').trigger('click');
+                            setTimeout(function () {
+                                $('#ferme').trigger('click');
+                            }, 4000);
+                        }
+                    },
+                    error: function (server_response)
+                    {
+                        alert(server_response);
+                    }
+                });
+            });
             $(document).ready(function ()
             {
                 $('#returnOnTop').hide();

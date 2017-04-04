@@ -1,7 +1,5 @@
 <?php
 
-    require_once "crypter-mdp.php";
-
     require_once 'cnx.php';
 
     $id = $_POST['idI'];
@@ -11,8 +9,8 @@
     $prenom = utf8_decode($_POST['prenomI']);
     $email = utf8_decode($_POST['emailI']);
     $tel = $_POST['telI'];
-    $rue = utf8_decode($_POST['rueI'];
-    $code_postal = $_POST['code-postalI']);
+    $rue = utf8_decode($_POST['rueI']);
+    $code_postal = $_POST['code-postalI'];
     $ville = utf8_decode($_POST['villeI']);
     $type_soin1 = utf8_decode(htmlspecialchars($_POST['type-soin1']));
     $type_soin2 = utf8_decode(htmlspecialchars($_POST['type-soin2']));

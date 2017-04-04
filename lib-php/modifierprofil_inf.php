@@ -111,7 +111,6 @@
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label">Liste</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="#"><span class="menu-item-label">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.html"><span class="menu-item-label">Contact</span></a></li>
@@ -136,7 +135,6 @@
                             <nav class="site-nav" role="navigation" style="">
                                <ul id="menu-main1" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label">Liste</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="#"><span class="menu-item-label">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.html"><span class="menu-item-label">Contact</span></a></li>
