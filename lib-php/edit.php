@@ -1,13 +1,14 @@
 <?php
+    require_once 'cnx.php';
 
-require_once 'cnx.php';
+    $id = ($_POST["id"]);
 
-$id = $_GET['id'];
-$status = "accepter";
+    $status = ($_POST["status"]);
 
-$bdd->exec("UPDATE `liste_demande` SET `status` = '" . $status . "' WHERE `id`= " . $_GET['id'] . "") or die(print_r($bdd->ErrorInfo()));
-if ($bdd)
-    echo 'reussi';
-else {
-    echo 'echec';
-}
+    if ($bdd->exec("UPDATE `liste_demande` SET `status` = '" . $status . "' WHERE `id`= " . $id . ""))
+    {
+        echo 'reussi';
+    }
+    else {
+        print_r($bdd->ErrorInfo());
+    }
