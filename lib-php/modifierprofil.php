@@ -234,10 +234,26 @@ $data = $req->fetch();
                                                             </div>
                                                             <div class="panel-body">
                                                                 <div class="">
-                                                                    <p><b><?php echo($data['type-soinP1']); ?></b> : <u><?php echo($data['frequence-soin1']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure1']) ?></u></b>.</p>
-                                                                    <p><b><?php echo($data['type-soinP2']); ?></b> : <u><?php echo($data['frequence-soin2']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure2']) ?></u></b>.</p>
-                                                                    <p><b><?php echo($data['type-soinP3']); ?></b> : <u><?php echo($data['frequence-soin3']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure3']) ?></u></b>.</p>
-                                                                    <p><b><?php echo($data['type-soinP4']); ?></b> : <u><?php echo($data['frequence-soin4']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure4']) ?></u></b>.</p>
+                                                                    <?php if ($data['type-soinP1'] != "") { ?>
+                                                                        <p>
+                                                                            <b><?php echo($data['type-soinP1']); ?></b> : <u><?php echo($data['frequence-soin1']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure1']) ?></u></b>
+                                                                        </p>
+                                                                    <?php } ?>
+                                                                    <?php if ($data['type-soinP2'] != "") { ?>
+                                                                        <p>
+                                                                            <b><?php echo($data['type-soinP2']); ?></b> : <u><?php echo($data['frequence-soin2']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure2']) ?></u></b>
+                                                                        </p>
+                                                                    <?php } ?>
+                                                                    <?php if ($data['type-soinP3'] != "") { ?>
+                                                                        <p>
+                                                                            <b><?php echo($data['type-soinP3']); ?></b> : <u><?php echo($data['frequence-soin3']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure3']) ?></u></b>
+                                                                        </p>
+                                                                    <?php } ?>
+                                                                    <?php if ($data['type-soinP4'] != "") { ?>
+                                                                        <p>
+                                                                            <b><?php echo($data['type-soinP4']); ?></b> : <u><?php echo($data['frequence-soin4']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure4']) ?></u></b>
+                                                                        </p>
+                                                                    <?php } ?>
                                                                 </div>
                                                                 <div class="btn btn-warning" id="changesoins" onClick="changeSoins();"> Changer mes informations de soins</div>
                                                             </div>
@@ -556,9 +572,9 @@ $data = $req->fetch();
             </div>
 
 
-                    <div class="btn_up">
-                      <img src="img/retour-en-haut.png" class="img-responsive" id="returnOnTop">
-                    </div>
+            <div class="btn_up">
+                <img src="img/retour-en-haut.png" class="img-responsive" id="returnOnTop">
+            </div>
 
 
             <!--Footer-->
@@ -589,7 +605,8 @@ $data = $req->fetch();
             function change()
             {
                 $('#photo').trigger('click');
-            };
+            }
+            ;
 
             function changeSoins()
             {
@@ -599,17 +616,18 @@ $data = $req->fetch();
                 $('[name="type-soinP2"]').val("");
                 $('[name="type-soinP3"]').val("");
                 $('[name="type-soinP4"]').val("");
-                
+
                 $('[name="frequence-soin1"]').val("");
                 $('[name="frequence-soin2"]').val("");
                 $('[name="frequence-soin3"]').val("");
                 $('[name="frequence-soin4"]').val("");
-                
+
                 $('[name="heure1"]').val("");
                 $('[name="heure2"]').val("");
                 $('[name="heure3"]').val("");
                 $('[name="heure4"]').val("");
-            };
+            }
+            ;
 
             $(function () {
                 // A chaque sélection de fichier
@@ -673,17 +691,17 @@ $data = $req->fetch();
                 $('[name="type-soinP2"]').val("<?php echo($data['type-soinP2']); ?>");
                 $('[name="type-soinP3"]').val("<?php echo($data['type-soinP3']); ?>");
                 $('[name="type-soinP4"]').val("<?php echo($data['type-soinP4']); ?>");
-                
+
                 $('[name="frequence-soin1"]').val("<?php echo($data['frequence-soin1']); ?>");
                 $('[name="frequence-soin2"]').val("<?php echo($data['frequence-soin2']); ?>");
                 $('[name="frequence-soin3"]').val("<?php echo($data['frequence-soin3']); ?>");
                 $('[name="frequence-soin4"]').val("<?php echo($data['frequence-soin4']); ?>");
-                
+
                 $('[name="heure1"]').val("<?php echo($data['heure1']); ?>");
                 $('[name="heure2"]').val("<?php echo($data['heure2']); ?>");
                 $('[name="heure3"]').val("<?php echo($data['heure3']); ?>");
                 $('[name="heure4"]').val("<?php echo($data['heure4']); ?>");
-                
+
                 $('#returnOnTop').hide();
                 $('#returnOnTop').click(function () {
                     //e.preventDefault();
@@ -693,10 +711,10 @@ $data = $req->fetch();
 
             $(window).scroll(function ()
             {
-                if ($(window).scrollTop() == 0)
-                    $('#returnOnTop').fadeOut();
-                else
+                if ($(window).scrollTop() > 400)
                     $('#returnOnTop').fadeIn();
+                else
+                    $('#returnOnTop').fadeOut();
             });
 
         </script>
