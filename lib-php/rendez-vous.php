@@ -6,7 +6,7 @@
 
 	$emailP = $_SESSION["email"];
 
-	$query = $bdd->query("SELECT * FROM liste_demande WHERE emailP=\"".$emailP."\"");
+	$query = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailP=\"".$emailP."\"");
 
 	if($query->rowCount() == 0){
 
@@ -62,7 +62,7 @@
 
 
 
-			$bdd->exec("INSERT INTO `liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')") or die(print_r($bdd->ErrorInfo()));
+			$bdd->exec("INSERT INTO `oulib_liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')") or die(print_r($bdd->ErrorInfo()));
 
 		echo "success";
 	}else{

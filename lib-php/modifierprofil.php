@@ -6,7 +6,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 include_once "cnx.php";
 
-$req = $bdd->query("SELECT * FROM patient WHERE emailP = '" . $_SESSION['email'] . "'");
+$req = $bdd->query("SELECT * FROM oulib_patient WHERE emailP = '" . $_SESSION['email'] . "'");
 $data = $req->fetch();
 ?>
 

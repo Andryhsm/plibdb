@@ -35,8 +35,8 @@ $fichier = basename($_FILES['photo']['name']);
 
 //Verification fichier
 if ($fichier == "") {
-    $reponse = $bdd->query("SELECT * FROM infirmiere WHERE emailI = '" . $email . "'");
-    $val = $bdd->query("SELECT * FROM patient WHERE emailP = '" . $email . "'");
+    $reponse = $bdd->query("SELECT * FROM oulib_infirmiere WHERE emailI = '" . $email . "'");
+    $val = $bdd->query("SELECT * FROM oulib_patient WHERE emailP = '" . $email . "'");
 
     $isa = $reponse->rowCount();
     $rep = $val->rowCount();
@@ -44,7 +44,7 @@ if ($fichier == "") {
     if (($isa == "0") && ($rep == "0")) {
         if ($mdp == $conf_mdp) {
             $patient = $val->fetch();
-            $bdd->exec("INSERT INTO `patient` (`photo`,`nomP`,`prenomP`,`emailP`,`mdpP`,`telP`,`rueP`,`code-postalP`,`villeP`,`code-acces`,`etage`,`info-sup`,`type-soinP1`,`type-soinP2`,`type-soinP3`,`type-soinP4`,`frequence-soin1`,`frequence-soin2`,`frequence-soin3`,`frequence-soin4`,`heure1`,`heure2`,`heure3`,`heure4`) VALUES ('avatar_patient.png','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$code_acces','$etage','$info_sup','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$frequence_soin1','$frequence_soin2','$frequence_soin3','$frequence_soin4','$heure1','$heure2','$heure3','$heure4')") or die(print_r($bdd->ErrorInfo()));
+            $bdd->exec("INSERT INTO `oulib_patient` (`photo`,`nomP`,`prenomP`,`emailP`,`mdpP`,`telP`,`rueP`,`code-postalP`,`villeP`,`code-acces`,`etage`,`info-sup`,`type-soinP1`,`type-soinP2`,`type-soinP3`,`type-soinP4`,`frequence-soin1`,`frequence-soin2`,`frequence-soin3`,`frequence-soin4`,`heure1`,`heure2`,`heure3`,`heure4`) VALUES ('avatar_patient.png','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$code_acces','$etage','$info_sup','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$frequence_soin1','$frequence_soin2','$frequence_soin3','$frequence_soin4','$heure1','$heure2','$heure3','$heure4')") or die(print_r($bdd->ErrorInfo()));
             $_SESSION['email'] = $email;
             $_SESSION['nomP'] = $nom;
             $_SESSION['prenomP'] = $prenom;
@@ -100,7 +100,7 @@ if ($fichier == "") {
             if (($isa == "0") && ($rep == "0")) {
                 if ($mdp == $conf_mdp) {
                     $patient = $val->fetch();
-                    $bdd->exec("INSERT INTO `patient` (`photo`,`nomP`,`prenomP`,`emailP`,`mdpP`,`telP`,`rueP`,`code-postalP`,`villeP`,`code-acces`,`etage`,`info-sup`,`type-soinP1`,`type-soinP2`,`type-soinP3`,`type-soinP4`,`frequence-soin1`,`frequence-soin2`,`frequence-soin3`,`frequence-soin4`,`heure1`,`heure2`,`heure3`,`heure4`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$code_acces','$etage','$info_sup','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$frequence_soin1','$frequence_soin2','$frequence_soin3','$frequence_soin4','$heure1','$heure2','$heure3','$heure4')") or die(print_r($bdd->ErrorInfo()));
+                    $bdd->exec("INSERT INTO `oulib_patient` (`photo`,`nomP`,`prenomP`,`emailP`,`mdpP`,`telP`,`rueP`,`code-postalP`,`villeP`,`code-acces`,`etage`,`info-sup`,`type-soinP1`,`type-soinP2`,`type-soinP3`,`type-soinP4`,`frequence-soin1`,`frequence-soin2`,`frequence-soin3`,`frequence-soin4`,`heure1`,`heure2`,`heure3`,`heure4`) VALUES ('$fichier','$nom','$prenom','$email','$mdp','$tel','$rue','$code_postal','$ville','$code_acces','$etage','$info_sup','$type_soin1','$type_soin2','$type_soin3','$type_soin4','$frequence_soin1','$frequence_soin2','$frequence_soin3','$frequence_soin4','$heure1','$heure2','$heure3','$heure4')") or die(print_r($bdd->ErrorInfo()));
                     $_SESSION['email'] = $email;
                     $_SESSION['nomP'] = $nom;
                     $_SESSION['prenomP'] = $prenom;
