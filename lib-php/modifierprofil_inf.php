@@ -434,7 +434,7 @@ $data = $req->fetch();
                                                                     <img class="thumbnail img-responsive" style="vertical-align: center;" width="300px" heigth="300px" src="../image-person/<?php echo($data['photo']); ?>">
                                                                     <blockqoute id="titre"><?php echo($data['photo']); ?></blockqoute>
                                                                 </div><br>
-                                                                <button class="btn btn-warning" id="changeTof" onClick="change();"> Changer ma photo de profil</button>
+                                                                <div class="btn btn-warning" id="changeTof" onClick="change();"> Changer ma photo de profil</div>
                                                             </div>
                                                         </div>
                                                     </div>
