@@ -14,12 +14,13 @@ $tel = $_POST['telI'];
 $rue = $_POST['rueI'];
 $code_postal = $_POST['code-postalI'];
 $ville = $_POST['villeI'];
+$latLng = $_POST['latLng'];
 $type_soin1 = htmlspecialchars($_POST['type-soin1']);
 $type_soin2 = htmlspecialchars($_POST['type-soin2']);
 $type_soin3 = htmlspecialchars($_POST['type-soin3']);
 $type_soin4 = htmlspecialchars($_POST['type-soin4']);
 $lieu_intervention = $_POST['lieu-intervention'];
-$latLng = $_POST['latLng'];
+
 
 $mdp = utf8_decode($mdp);
 $conf_mdp = utf8_decode($conf_mdp);
@@ -30,12 +31,13 @@ $tel = utf8_decode($tel);
 $rue = utf8_decode($rue);
 $code_postal = utf8_decode($code_postal);
 $ville = utf8_decode($ville);
+$latLng = utf8_decode($latLng);
 $type_soin1 = utf8_decode($type_soin1);
 $type_soin2 = utf8_decode($type_soin2);
 $type_soin3 = utf8_decode($type_soin3);
 $type_soin4 = utf8_decode($type_soin4);
 $lieu_intervention = utf8_decode($lieu_intervention);
-$latLng = utf8_decode($latLng);
+
 
 $dossier = '../image-person/';
 

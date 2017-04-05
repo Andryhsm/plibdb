@@ -195,26 +195,30 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 function initMap() {
                   map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
-                    zoom: 6
+                    zoom: 16
                   });
-                  var infoWindow = new google.maps.InfoWindow({map: map});
 
                   // Try HTML5 geolocation.
                   if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
+
                       var pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                       };
 
-                      infoWindow.setPosition(pos);
-                      infoWindow.setContent('Location found.');
+                      var marker = new google.maps.Marker({
+                        map: map,
+                        position: pos
+                      });
+                      marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
                       map.setCenter(pos);
+
+
                     }, function() {
                       handleLocationError(true, infoWindow, map.getCenter());
                     });
-                  } else {
-                    // Browser doesn't support Geolocation
+                  } else {              
                     handleLocationError(false, infoWindow, map.getCenter());
                   }
                 }
@@ -225,6 +229,62 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                         'Error: The Geolocation service failed.' :
                                         'Error: Your browser doesn\'t support geolocation.');
                 }
+
+
+                $.ajax({
+                    url: 'lib-php/infirmier_json.php',
+                    type: 'GET',
+                    success: function(data){
+                        var json = $.parseJSON(data);
+                        alert(json.length);
+                        for (var i = json.length - 1; i >= 0; i--) {
+                            var infirmier = $.parseJSON(json[i]);
+                            if(typeof infirmier.latLng != "undefined"){
+                                latLng = infirmier.latLng.replace('(', '');
+                                latLng = latLng.replace(')', '');
+                                var latLng = latLng.split(',');
+                                //alert(latLng[0]);
+                                var pos = new google.maps.LatLng(latLng[0], latLng[1]);
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: pos
+                                });
+
+                                
+                                var p = "<div class='col-lg-12'>";
+                                p += "<center><h4>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
+                                p += "<div class='col-lg-8'>";
+                                p += "<p><strong>Téléphone : </strong>"+infirmier.telI+"</p>";
+                                p += "<p><strong>Email : </strong>"+ infirmier.emailI +"</p>";
+                                p += "<p><strong>Adresse : </strong>" + infirmier.rueI +" - "+infirmier.code_postalI+" - "+infirmier.villeI+"</p>";
+                                p += "<p><strong>Type de soin : </strong> "+infirmier.type_soinI1+" - "+infirmier.type_soinI2+" - "+infirmier.type_soinI3+" - "+infirmier.type_soinI4+"</p>";
+                                p += "<p><strong>Lieu d'intervention : "+ infirmier.lieu_intervention +"</strong></p>";
+                                p += "</div>";
+                                p += "<div class='col-lg-4'>";
+                                p += "<img src='./image-person/"+infirmier.photo+"' style='width:60%;'/>";
+                                p += "</div>";
+                                p += "<div class='col-lg-12'>";
+                                p += "<center><textarea class='form-control' placeholder='Ecrivez votre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
+                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous();' value='Prendre rendez-vous' /></center>";
+                                p += "</div>";
+                                p += "</div>";
+
+                                var infoW = new google.maps.InfoWindow({
+                                    content: p
+                                });
+
+                                marker.addListener('click', function(){
+                                    infoW.open(map, marker);
+                                });
+
+                            }
+                        }
+                    },
+                    error: function(){
+                        alert("Une erreur de recuperation des données ! ");
+                    }
+                  });
+                
 
         </script>
     </body>
