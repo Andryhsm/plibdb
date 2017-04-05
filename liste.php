@@ -7,6 +7,8 @@ include_once "./lib-php/cnx.php";
 
 $req = $bdd->query("SELECT * FROM liste_demande WHERE status = 'attente'");
 $data = $req->fetch();
+
+
 ?>
 
 

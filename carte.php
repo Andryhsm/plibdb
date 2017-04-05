@@ -195,7 +195,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 function initMap() {
                   map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
-                    zoom: 16
+                    zoom: 10
                   });
 
                   // Try HTML5 geolocation.
@@ -264,8 +264,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                 p += "<img src='./image-person/"+infirmier.photo+"' style='width:60%;'/>";
                                 p += "</div>";
                                 p += "<div class='col-lg-12'>";
-                                p += "<center><textarea class='form-control' placeholder='Ecrivez votre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
-                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous();' value='Prendre rendez-vous' /></center>";
+                                p += "<center><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
+                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\""+infirmier.emailI+"\");' value='Prendre rendez-vous' /></center>";
                                 p += "</div>";
                                 p += "</div>";
 
@@ -286,6 +286,24 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                   });
                 
 
+                function rendezVous(emailI){
+                    var commentaire = encodeURIComponent($("#commentaire").val());
+
+                    $.ajax({
+                            url: 'lib-php/rendez-vous.php?emailI='+emailI+"&commentaire="+commentaire,
+                            type: 'GET',
+                        success: function(data){
+                            if(data === "reussi"){
+                                alert("Votre demande est bien envoyer !");
+                            }
+                        },
+                        error: function(){
+                            alert("Impossible de charger rendez-vous.php");
+                        }
+                    });
+                }
+
         </script>
+
     </body>
 </html>
