@@ -150,12 +150,12 @@ include_once "./lib-php/cnx.php";
                             <div class="liste">
                                 <?php
                                 $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
+                                $b = FALSE;
                                 while ($data = $req->fetch()) {
                                     ?>
-                                    <?php if ($data) { ?>
                                         <table class="table table-hover">
                                             <tbody id="content">
-                                                <tr class="<?php echo($data['id']); ?>">
+                                                <tr class="<?php $b = TRUE; echo($data['id']); ?>">
                                                     <td width='15%'>
                                                         <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
                                                     </td>
@@ -179,10 +179,10 @@ include_once "./lib-php/cnx.php";
                                             </tbody>
                                         </table>
                                         <?php
-                                    } else {
+                                    } if($b == FALSE) {
                                         echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
                                     }
-                                }
+                                
                                 ?>
                             </div>
                         </div>

@@ -133,41 +133,44 @@ include_once "./lib-php/cnx.php";
                         <div class="container alchem_section_4_model">
 
                             <?php
-                                $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
-                                while ($data = $req->fetch()) {
-                                    ?>
-                                    <?php if ($data) { ?>
-                                        <table class="table table-hover">
-                                            <tbody id="content">
-                                                <tr class="<?php echo($data['id']); ?>">
-                                                    <td width='15%'>
-                                                        <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                                    </td>
-                                                    <td width='45%'>
-                                                        <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-                                                        <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                        <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                        <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
-                                                        <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                                    </td>
-                                                    <td width='40%'>
-                                                        <br><br>
-                                                        <?php echo($data['commentaire']); ?>
-                                                        <br><br><br>
-                                                        <div class="pull-right">
-                                                            <a class="btn btn-success itineraire">Itineraire</a>&nbsp;&nbsp
-                                                            <a class="btn btn-danger terminer">Terminer</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <?php
-                                    } else {
-                                        echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
-                                    }
-                                }
+                            $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
+
+                            $b = FALSE;
+
+                            while ($data = $req->fetch()) {
                                 ?>
+                                <table class="table table-hover">
+                                    <tbody id="content">
+                                        <tr class="<?php $b = TRUE;
+                            echo($data['id']);
+                                ?>">
+                                            <td width='15%'>
+                                                <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                            </td>
+                                            <td width='45%'>
+                                                <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                            </td>
+                                            <td width='40%'>
+                                                <br><br>
+    <?php echo($data['commentaire']); ?>
+                                                <br><br><br>
+                                                <div class="pull-right">
+                                                    <a class="btn btn-success itineraire">Itineraire</a>&nbsp;&nbsp
+                                                    <a class="btn btn-danger terminer">Terminer</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <?php
+                            } if ($b == FALSE) {
+                                echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                            }
+                            ?>
 
                         </div>
                     </div>
