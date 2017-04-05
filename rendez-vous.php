@@ -4,9 +4,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
     header("Location: login.html");
 }
 include_once "./lib-php/cnx.php";
-
-$req = $bdd->query("SELECT * FROM liste_demande WHERE status = 'accepter'");
-$data = $req->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -135,36 +132,40 @@ $data = $req->fetch();
                     <div class="section-content">
                         <div class="container alchem_section_4_model">
 
+                            <?php
+                            $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
+                            while ($data = $req->fetch()) {
+                                ?>
+                                <?php if ($data) { ?>
+                                    <table class="table table-hover">
+                                        <tbody id="content">
 
-                            <?php if ($data) { ?>
-                                <table class="table table-hover">
-                                    <tbody id="content">
-                                        
-                                        <tr>
-                                            <td width='15%'>
-                                                <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                            </td>
-                                            <td width='45%'>
-                                                <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-                                                <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
-                                                <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                            </td>
-                                            <td width='40%'>
-                                                <br><br>
-                                                <?php echo($data['commentaire']); ?>
-                                                <br><br>
-                                                <a id="itineraire" class="btn btn-success" href="#">Itineraire</a>
-                                                <a id="terminer" class="btn btn-danger" href="./lib-php/edit3.php?id='<?php echo($data['id']); ?>'">Terminer</a>
-                                            </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                                <?php
-                            } else {
-                                echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                                            <tr>
+                                                <td width='15%'>
+                                                    <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                                </td>
+                                                <td width='45%'>
+                                                    <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+                                                    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                    <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                    <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                    <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                                </td>
+                                                <td width='40%'>
+                                                    <br><br>
+                                                    <?php echo($data['commentaire']); ?>
+                                                    <br><br>
+                                                    <a id="itineraire" class="btn btn-success" href="#">Itineraire</a>
+                                                    <a id="terminer" class="btn btn-danger" href="./lib-php/edit3.php?id='<?php echo($data['id']); ?>'">Terminer</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                } else {
+                                    echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                                }
                             }
                             ?>
 
