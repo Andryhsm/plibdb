@@ -170,6 +170,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
 
         <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&callback=initMap" async defer></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&libraries=places"></script>
+
         <script type="text/javascript">
             $(document).ready(function ()
             {
@@ -190,8 +192,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         </script>
         <script type="text/javascript">
              var map;
-
-         
                 function initMap() {
                   map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
@@ -222,6 +222,10 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     handleLocationError(false, infoWindow, map.getCenter());
                   }
                 }
+
+
+                //Pour l'autocompletion
+
 
                 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                   infoWindow.setPosition(pos);
