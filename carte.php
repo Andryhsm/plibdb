@@ -75,9 +75,57 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 margin: 0% 2% 0% 2%;
                 width: 95vw;
                 height: 80vh;
-                background: yellow;
+                background: white;
             }
-            </style><!-- <meta name="vfb" version="2.9.2" /> -->
+
+            .controls {
+                margin-top: 10px;
+                border: 1px solid transparent;
+                border-radius: 2px 0 0 2px;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                height: 32px;
+                outline: none;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            }
+            #pac-input {
+                position: absolute;
+                z-index: 1;
+                margin: 1% 0% 0% 10%;
+                background-color: #fff;
+                font-family: Roboto;
+                font-size: 15px;
+                font-weight: 300;
+                margin-left: 12px;
+                padding: 0 11px 0 13px;
+                text-overflow: ellipsis;
+                width: 300px;
+            }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }
+
+            .pac-container {
+                font-family: Roboto;
+            }
+
+            #type-selector {
+                color: #fff;
+                background-color: #4d90fe;
+                padding: 5px 11px 0px 11px;
+            }
+
+            #type-selector label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+            #chercher{
+                margin: -4% 0% 0% -16%;
+            }
+        </style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
@@ -137,26 +185,30 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             <div id="alchem-home-sections">
-            <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror">tester</button>
+                <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror">tester</button>
 
-            <div class="modal" id="loginerror">
-                  <div class="modal-dialog">
-                    <div class="modal-content alert alert-dismissible alert-info col-lg-12">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
-                        <h4 class="modal-title" style="text-align: center;">Information !</h4>
-                      </div>
-                      <div class="modal-body">
-                        <div class="warning" id="info"></div>
-                      </div>
-                      <div class="modal-footer">
-                      </div>
+                <div class="modal" id="loginerror">
+                    <div class="modal-dialog">
+                        <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
+                                <h4 class="modal-title" style="text-align: center;">Information !</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="warning" id="info"></div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
                     </div>
-                  </div>
-            </div>
+                </div>
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
+                    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                    <div id="type-selector" class="controls">  
+                        <label>Ici pour chercher un lieu</label>
 
+                    </div>
                     <div id="map"></div>
 
                 </section>
@@ -179,8 +231,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 </div>          
             </footer>
         </div>  
-        
-     
+
+
 
 
         <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
@@ -196,78 +248,131 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&callback=initMap" async defer></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&libraries=places"></script>
 
+
         <script type="text/javascript">
-            $(document).ready(function ()
-            {
-                $('#returnOnTop').hide();
-                $('#returnOnTop').click(function () {
-                    //e.preventDefault();
-                    $('html,body').animate({scrollTop: 0}, 'slow');
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -33.8688, lng: 151.2195},
+                    zoom: 13
                 });
-            });
 
-            $(window).scroll(function ()
-            {
-                if ($(window).scrollTop() == 0)
-                    $('#returnOnTop').fadeOut();
-                else
-                    $('#returnOnTop').fadeIn();
-            });
-        </script>
-        <script type="text/javascript">
-             var map;
-                function initMap() {
-                  map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -34.397, lng: 150.644},
-                    zoom: 10
-                  });
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
 
-                  // Try HTML5 geolocation.
-                  if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
 
-                      var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                      };
-
-                      var marker = new google.maps.Marker({
-                        map: map,
-                        position: pos
-                      });
-                      marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
-                      map.setCenter(pos);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: pos
+                        });
+                        marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+                        map.setCenter(pos);
 
 
-                    }, function() {
-                      handleLocationError(true, infoWindow, map.getCenter());
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
                     });
-                  } else {              
+                } else {
                     handleLocationError(false, infoWindow, map.getCenter());
-                  }
                 }
-
 
                 //Pour l'autocompletion
 
 
                 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                  infoWindow.setPosition(pos);
-                  infoWindow.setContent(browserHasGeolocation ?
-                                        'Error: The Geolocation service failed.' :
-                                        'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
                 }
 
 
+                var input = /** @type {!HTMLInputElement} */(
+                        document.getElementById('pac-input'));
+
+                var types = document.getElementById('type-selector');
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+                var autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.bindTo('bounds', map);
+
+                var infowindow = new google.maps.InfoWindow();
+                var marker = new google.maps.Marker({
+                    map: map,
+                    anchorPoint: new google.maps.Point(0, -29)
+                });
+
+                autocomplete.addListener('place_changed', function () {
+                    infowindow.close();
+                    marker.setVisible(false);
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        var addr = $("#pac-input").val();
+                        geocodeAddress(map, addr);
+                    }
+
+                    // If the place has a geometry, then present it on a map.
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);  // Why 17? Because it looks good.
+                    }
+                    marker.setIcon(/** @type {google.maps.Icon} */({
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(35, 35)
+                    }));
+                    marker.setPosition(place.geometry.location);
+                    marker.setVisible(true);
+
+                    var address = '';
+                    if (place.address_components) {
+                        address = [
+                            (place.address_components[0] && place.address_components[0].short_name || ''),
+                            (place.address_components[1] && place.address_components[1].short_name || ''),
+                            (place.address_components[2] && place.address_components[2].short_name || '')
+                        ].join(' ');
+                    }
+
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                    infowindow.open(map, marker);
+                });
+
+                // Sets a listener on a radio button to change the filter type on Places
+                // Autocomplete.
+                function setupClickListener(id, types) {
+                    var radioButton = document.getElementById(id);
+                    radioButton.addEventListener('click', function () {
+                        autocomplete.setTypes(types);
+                    });
+                }
+
+                setupClickListener('changetype-all', []);
+                setupClickListener('changetype-address', ['address']);
+                setupClickListener('changetype-establishment', ['establishment']);
+                setupClickListener('changetype-geocode', ['geocode']);
+            }
+
+
+            jQuery(document).ready(function ($) {
                 $.ajax({
                     url: 'lib-php/infirmier_json.php',
                     type: 'GET',
-                    success: function(data){
+                    success: function (data) {
                         var json = $.parseJSON(data);
                         //alert(json.length);
                         for (var i = json.length - 1; i >= 0; i--) {
                             var infirmier = $.parseJSON(json[i]);
-                            if(typeof infirmier.latLng != "undefined"){
+                            if (typeof infirmier.latLng != "undefined") {
                                 latLng = infirmier.latLng.replace('(', '');
                                 latLng = latLng.replace(')', '');
                                 var latLng = latLng.split(',');
@@ -278,22 +383,22 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                     position: pos
                                 });
 
-                                
+
                                 var p = "<div class='col-lg-12'>";
                                 p += "<center><h4>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
                                 p += "<div class='col-lg-8'>";
-                                p += "<p><strong>Téléphone : </strong>"+infirmier.telI+"</p>";
-                                p += "<p><strong>Email : </strong>"+ infirmier.emailI +"</p>";
-                                p += "<p><strong>Adresse : </strong>" + infirmier.rueI +" - "+infirmier.code_postalI+" - "+infirmier.villeI+"</p>";
-                                p += "<p><strong>Type de soin : </strong> "+infirmier.type_soinI1+" - "+infirmier.type_soinI2+" - "+infirmier.type_soinI3+" - "+infirmier.type_soinI4+"</p>";
-                                p += "<p><strong>Lieu d'intervention : "+ infirmier.lieu_intervention +"</strong></p>";
+                                p += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
+                                p += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
+                                p += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
+                                p += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
+                                p += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
                                 p += "</div>";
                                 p += "<div class='col-lg-4'>";
-                                p += "<img src='./image-person/"+infirmier.photo+"' style='width:60%;'/>";
+                                p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
                                 p += "</div>";
                                 p += "<div class='col-lg-12'>";
                                 p += "<center><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
-                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\""+infirmier.emailI+"\");' value='Prendre rendez-vous' /></center>";
+                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\"" + infirmier.emailI + "\");' value='Prendre rendez-vous' /></center>";
                                 p += "</div>";
                                 p += "</div>";
 
@@ -301,53 +406,80 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                     content: p
                                 });
 
-                                marker.addListener('click', function(){
+                                marker.addListener('click', function () {
                                     infoW.open(map, marker);
                                 });
 
                             }
                         }
                     },
-                    error: function(){
+                    error: function () {
                         alert("Une erreur de recuperation des données ! ");
                     }
-                  });
-                
+                });
 
-                function rendezVous(emailI){
-                    var commentaire = encodeURIComponent($("#commentaire").val());
 
-                    $.ajax({
-                            url: 'lib-php/rendez-vous.php?emailI='+emailI+"&commentaire="+commentaire,
-                            type: 'GET',
-                        success: function(data){
-                            if(data === "reussi"){
-                                
-                                $('#info').html('<p> Votre demande est vient envoyer . </p>');
-                                $('#triggerwarning').trigger('click');
-                                setTimeout(function() {
-                                $('#ferme').trigger('click');
-                                }, 40000);
+            });
+            function rendezVous(emailI) {
+                var commentaire = encodeURIComponent($("#commentaire").val());
 
-                            }else if(data === "existe"){                             
-                                $('#info').html('<p> Vous avez deja envoyer une demande </p>');
-                                $('#triggerwarning').trigger('click');
-                                setTimeout(function() {
+                $.ajax({
+                    url: 'lib-php/rendez-vous.php?emailI=' + emailI + "&commentaire=" + commentaire,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data === "reussi") {
+
+                            $('#info').html('<p> Votre demande est vient envoyer . </p>');
+                            $('#triggerwarning').trigger('click');
+                            setTimeout(function () {
                                 $('#ferme').trigger('click');
-                                }, 40000);
-                            }else{
-                            }
-                        },
-                        error: function(){
-                            $('#info').html('<p> Veuillez indiquer un adresse e-mail valide et un mot de passe. </p>');
-                                $('#triggerwarning').trigger('click');
-                                setTimeout(function() {
+                            }, 40000);
+
+                        } else if (data === "existe") {
+                            $('#info').html('<p> Vous avez deja envoyer une demande </p>');
+                            $('#triggerwarning').trigger('click');
+                            setTimeout(function () {
                                 $('#ferme').trigger('click');
-                                }, 40000);
+                            }, 40000);
+                        } else {
                         }
-                    });
-                }
+                    },
+                    error: function () {
+                        $('#info').html('<p> Veuillez indiquer un adresse e-mail valide et un mot de passe. </p>');
+                        $('#triggerwarning').trigger('click');
+                        setTimeout(function () {
+                            $('#ferme').trigger('click');
+                        }, 40000);
+                    }
+                });
+            }
 
+//Geocodage des adresses
+            function geocodeAddress(resultsMap, address) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': address}, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        resultsMap.panTo(results[0].geometry.location);
+                        if (marker) {
+                            marker.setMap(null);
+                        }
+                        marker = new google.maps.Marker({
+                            map: resultsMap,
+                            position: results[0].geometry.location
+                        });
+                        var latLng = results[0].geometry.location.lat;
+                        var position = marker.getPosition();
+                        // alert(results[0].geometry.location);
+                        var infoBull = new google.maps.InfoWindow({
+                            content: "Votre lieu d'intervention est ici ?"
+                        });
+                        infoBull.open(map, marker);
+                        $("#latLng").val(position);
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
         </script>
 
     </body>

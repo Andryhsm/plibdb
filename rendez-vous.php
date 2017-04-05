@@ -67,7 +67,21 @@ include_once "./lib-php/cnx.php";
             {
                 display: none;
                 cursor: pointer;
-            }</style><!-- <meta name="vfb" version="2.9.2" /> -->
+            }
+            .fixed
+            {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+            .liste
+            {
+                width: 100%;
+                height: 550px;
+                overflow: auto;
+            }
+            </style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
@@ -131,7 +145,7 @@ include_once "./lib-php/cnx.php";
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
                     <div class="section-content">
                         <div class="container alchem_section_4_model">
-
+                            <div class="liste">
                             <?php
                             $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
 
@@ -139,6 +153,7 @@ include_once "./lib-php/cnx.php";
 
                             while ($data = $req->fetch()) {
                                 ?>
+
                                 <table class="table table-hover">
                                     <tbody id="content">
                                         <tr class="<?php $b = TRUE;
@@ -172,6 +187,7 @@ include_once "./lib-php/cnx.php";
                             }
                             ?>
 
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -199,7 +215,7 @@ include_once "./lib-php/cnx.php";
             </div>
 
             <!--Footer-->
-            <footer class="">
+            <footer class="fixed">
                 <div class="footer-info-area">
                     <div class="container text-center alchem_footer_social_icon_1"> 
                         <div class="clearfix"></div>

@@ -8,8 +8,8 @@
 
 	try 
 	{
-		$reponse = $bdd->query("SELECT * FROM infirmiere WHERE emailI = '".$email."'");
-		$query = $bdd->query("SELECT * FROM patient WHERE emailP = '".$email."'");
+		$reponse = $bdd->query("SELECT * FROM oulib_infirmiere WHERE emailI = '".$email."'");
+		$query = $bdd->query("SELECT * FROM oulib_patient WHERE emailP = '".$email."'");
 
 			$isa = $reponse->rowCount();
 			$rep = $query->rowCount();

@@ -5,7 +5,7 @@
 
     $status = ($_POST["status"]);
 
-    if ($bdd->exec("UPDATE `liste_demande` SET `status` = '" . $status . "' WHERE `id`= " . $id . ""))
+    if ($bdd->exec("UPDATE `oulib_liste_demande` SET `status` = '" . $status . "' WHERE `id`= " . $id . ""))
     {
         echo 'reussi';
     }

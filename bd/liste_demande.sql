@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `liste_demande`
 --
 
-CREATE TABLE `liste_demande` (
+CREATE TABLE `oulib_liste_demande` (
   `id` int(11) NOT NULL,
   `photo` varchar(255) NOT NULL,
   `emailI` varchar(255) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `liste_demande` (
 -- Contenu de la table `liste_demande`
 --
 
-INSERT INTO `liste_demande` (`id`, `photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES
+INSERT INTO `oulib_liste_demande` (`id`, `photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES
 (143, '', 'ahly@medsoft-sante.fr', 'Feno', 'Tolojanahary', '304003', 'Cicatrisation - Stomarhérapie - Sondage - ', 'gh dfhd hdfh dfh df hdf hd fh dfh df df d', '14h - 10h -  - ', '2 - 2 -  -  - ', 'accepter', 'feno@gmail.com'),
 (144, '', 'ahly@medsoft-sante.fr', 'stian', 'andry', '346448609', 'Perfusion - Cicatrisation -  - ', '', '12h', '', 'accepter', 'rt@gmail.com'),
 (145, '', 'ahly@medsoft-sante.fr', 'stian', 'andry', '346448609', 'Perfusion - Cicatrisation -  - ', '', '12h - 42h -  - ', '1 - 1 -  -  - ', 'accepter', 'rt@gmail.com'),
@@ -68,7 +68,7 @@ INSERT INTO `liste_demande` (`id`, `photo`, `emailI`, `nomP`, `prenomP`, `telP`,
 --
 -- Index pour la table `liste_demande`
 --
-ALTER TABLE `liste_demande`
+ALTER TABLE `oulib_liste_demande`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -78,7 +78,7 @@ ALTER TABLE `liste_demande`
 --
 -- AUTO_INCREMENT pour la table `liste_demande`
 --
-ALTER TABLE `liste_demande`
+ALTER TABLE `oulib_liste_demande`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

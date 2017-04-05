@@ -28,7 +28,7 @@
 
     if(($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3=="") && ($type_soin4=="") && ($lieu_intervention=="") && ($fichier != ""))
     {
-        $bdd->exec("UPDATE `infirmiere` SET `photo` = '".$fichier."', `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
+        $bdd->exec("UPDATE `oulib_infirmiere` SET `photo` = '".$fichier."', `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
 
                         echo 'Votre profil a bien été modifié';
     } 
@@ -36,11 +36,11 @@
     {
         if(($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3=="") && ($type_soin4=="") && ($lieu_intervention==""))
         {
-            $bdd->exec("UPDATE `infirmiere` SET `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
+            $bdd->exec("UPDATE `oulib_infirmiere` SET `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
 
                             echo 'Votre profil a bien été modifié';
         } else {
-            $bdd->exec("UPDATE `infirmiere` SET `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."',`type-soinI1` = '".$type_soin1."',`type-soinI2` = '".$type_soin2."',`type-soinI3` = '".$type_soin3."',`type-soinI4` = '".$type_soin4."',`lieu-intervention` = '".$lieu_intervention."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
+            $bdd->exec("UPDATE `oulib_infirmiere` SET `nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."',`type-soinI1` = '".$type_soin1."',`type-soinI2` = '".$type_soin2."',`type-soinI3` = '".$type_soin3."',`type-soinI4` = '".$type_soin4."',`lieu-intervention` = '".$lieu_intervention."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
 
                             echo 'Votre profil a bien été modifié';
         }
@@ -67,7 +67,7 @@
                 if ($mdp == $conf_mdp) 
                 {
 
-                    $bdd->exec("UPDATE `infirmiere` SET `photo` = '".$fichier."',`nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."',`type-soinI1` = '".$type_soin1."',`type-soinI2` = '".$type_soin2."',`type-soinI3` = '".$type_soin3."',`type-soinI4` = '".$type_soin4."',`lieu-intervention` = '".$lieu_intervention."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
+                    $bdd->exec("UPDATE `oulib_infirmiere` SET `photo` = '".$fichier."',`nomI` = '".$nom."',`prenomI` = '".$prenom."',`emailI` = '".$email."',`mdpI` = '".$mdp."',`telI` = '".$tel."',`rueI` = '".$rue."',`code-postalI` = '".$code_postal."',`villeI` = '".$ville."',`type-soinI1` = '".$type_soin1."',`type-soinI2` = '".$type_soin2."',`type-soinI3` = '".$type_soin3."',`type-soinI4` = '".$type_soin4."',`lieu-intervention` = '".$lieu_intervention."' WHERE `id`= '".$id."'") or die(print_r($bdd->ErrorInfo()));
 
                     echo 'Votre profil a bien été modifié';
                     //header("Location: ../index.html");
