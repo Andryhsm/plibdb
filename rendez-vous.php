@@ -133,41 +133,41 @@ include_once "./lib-php/cnx.php";
                         <div class="container alchem_section_4_model">
 
                             <?php
-                            $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
-                            while ($data = $req->fetch()) {
-                                ?>
-                                <?php if ($data) { ?>
-                                    <table class="table table-hover">
-                                        <tbody id="content">
-
-                                            <tr>
-                                                <td width='15%'>
-                                                    <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                                </td>
-                                                <td width='45%'>
-                                                    <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-                                                    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                    <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                    <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
-                                                    <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                                </td>
-                                                <td width='40%'>
-                                                    <br><br>
-                                                    <?php echo($data['commentaire']); ?>
-                                                    <br><br>
-                                                    <a id="itineraire" class="btn btn-success" href="#">Itineraire</a>
-                                                    <a id="terminer" class="btn btn-danger" href="./lib-php/edit3.php?id='<?php echo($data['id']); ?>'">Terminer</a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                    <?php
-                                } else {
-                                    echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                                $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
+                                while ($data = $req->fetch()) {
+                                    ?>
+                                    <?php if ($data) { ?>
+                                        <table class="table table-hover">
+                                            <tbody id="content">
+                                                <tr class="<?php echo($data['id']); ?>">
+                                                    <td width='15%'>
+                                                        <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                                    </td>
+                                                    <td width='45%'>
+                                                        <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+                                                        <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                        <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                        <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                        <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                                    </td>
+                                                    <td width='40%'>
+                                                        <br><br>
+                                                        <?php echo($data['commentaire']); ?>
+                                                        <br><br><br>
+                                                        <div class="pull-right">
+                                                            <a class="btn btn-success itineraire">Itineraire</a>&nbsp;&nbsp
+                                                            <a class="btn btn-danger terminer">Terminer</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <?php
+                                    } else {
+                                        echo '<center><h3>Vous n\'avez pas de rendez-vous aujourd\'hui</h3></center>';
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
 
                         </div>
                     </div>
@@ -211,25 +211,27 @@ include_once "./lib-php/cnx.php";
 
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
         <script type="text/javascript">
-            $('#terminer').click(function (e)
-            {
+            $('.table').on('click', '.terminer', function (e) {
                 e.preventDefault();
 
-                var form = $('#form-filter').get(0);
-                var formData = new FormData(form);// get the form data
-                // on envoi formData vers mail.php
+                var a = $(this);
+                var id = a.parents('tr').attr('class');
+
+                var status = "terminer";
+                var dataString = "id=" + id + "&status=" + status;
+
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    url: 'lib-php/edit3.php?id=\'<?php echo($data['id']); ?>\'', // the url where we want to POST
-                    data: formData, // our data object
-                    dataType: 'text', // what type of data do we expect back from the server
-                    processData: false,
-                    contentType: false,
+                    url: 'lib-php/edit.php', // the url where we want to POST
+                    data: dataString, // our data object
+                    dataType: 'text',
                     success: function (server_response)
                     {
                         if (server_response === "reussi")
                         {
-                            window.location.replace("rendez-vous.php");
+                            $('.' + id).fadeOut('slow', function () {
+                                $(this).remove();
+                            });
                         }
                         else
                         {
@@ -246,7 +248,6 @@ include_once "./lib-php/cnx.php";
                     }
                 });
             });
-
             $(document).ready(function ()
             {
                 $('#returnOnTop').hide();
