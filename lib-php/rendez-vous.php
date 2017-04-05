@@ -4,66 +4,68 @@
 
 	session_start();
 
-
-	//echo urldecode($_GET["commentaire"]);
-
-
-	$emailI = $_GET["emailI"];
-
-	$commentaire = urldecode($_GET["commentaire"]);
-
-	
-	$nomP = $_SESSION["nomP"];
-	$prenomP = $_SESSION["prenomP"];
 	$emailP = $_SESSION["email"];
-	$telP = $_SESSION["telP"];
-	$rueP = $_SESSION["rueP"];
-	$codePostalP = $_SESSION["code-postalP"];
-	$villeP = $_SESSION["villeP"];
-	$typeSoin1 = $_SESSION["type-soinP1"];
-	$typeSoin2 = $_SESSION["type-soinP2"];
-	$typeSoin3 = $_SESSION["type-soinP3"];
-	$typeSoin4 = $_SESSION["type-soinP4"];
-	$frequenceSoin1 = $_SESSION["frequence-soin1"];
-	$frequenceSoin2 = $_SESSION["frequence-soin2"];
-	$frequenceSoin3 = $_SESSION["frequence-soin3"];
-	$frequenceSoin4 = $_SESSION["frequence-soin4"];
-	$heure1 = $_SESSION["heure1"];
-	$heure2 = $_SESSION["heure2"];
-	$heure3 = $_SESSION["heure3"];
-	$heure4 = $_SESSION["heure4"];
-	$photo = $_SESSION["photo"];
 
-	$status = "attente";
+	$query = $bdd->query("SELECT * FROM liste_demande WHERE emailP=\"".$emailP."\"");
 
-	if($typeSoin2 != null)
-		$typeSoinP = $typeSoin1. " - ". $typeSoin2;
-	if($typeSoin3 != null)
-		$typeSoinP = $typeSoin1. " - ". $typeSoin2 . " - ". $typeSoin3;
-	if($typeSoin4 != null)
-		$typeSoinP = $typeSoin1. " - ". $typeSoin2 . " - ". $typeSoin3 ." - ". $typeSoin4;
-	
+	if($query->rowCount() == 0){
 
-	if($frequenceSoin2 != null)
-		$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2;
-	if($frequenceSoin3 != null)
-		$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3;
-	if($frequenceSoin4 != null)
-		$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3 ." - ". $frequenceSoin4;
+			$emailI = $_GET["emailI"];
+
+			$commentaire = urldecode($_GET["commentaire"]);
+
+			
+			$nomP = $_SESSION["nomP"];
+			$prenomP = $_SESSION["prenomP"];
+			$telP = $_SESSION["telP"];
+			$rueP = $_SESSION["rueP"];
+			$codePostalP = $_SESSION["code-postalP"];
+			$villeP = $_SESSION["villeP"];
+			$typeSoin1 = $_SESSION["type-soinP1"];
+			$typeSoin2 = $_SESSION["type-soinP2"];
+			$typeSoin3 = $_SESSION["type-soinP3"];
+			$typeSoin4 = $_SESSION["type-soinP4"];
+			$frequenceSoin1 = $_SESSION["frequence-soin1"];
+			$frequenceSoin2 = $_SESSION["frequence-soin2"];
+			$frequenceSoin3 = $_SESSION["frequence-soin3"];
+			$frequenceSoin4 = $_SESSION["frequence-soin4"];
+			$heure1 = $_SESSION["heure1"];
+			$heure2 = $_SESSION["heure2"];
+			$heure3 = $_SESSION["heure3"];
+			$heure4 = $_SESSION["heure4"];
+			$photo = $_SESSION["photo"];
+
+			$status = "attente";
+
+			if($typeSoin2 != null)
+				$typeSoinP = $typeSoin1. " - ". $typeSoin2;
+			if($typeSoin3 != null)
+				$typeSoinP = $typeSoin1. " - ". $typeSoin2 . " - ". $typeSoin3;
+			if($typeSoin4 != null)
+				$typeSoinP = $typeSoin1. " - ". $typeSoin2 . " - ". $typeSoin3 ." - ". $typeSoin4;
+			
+
+			if($frequenceSoin2 != null)
+				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2;
+			if($frequenceSoin3 != null)
+				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3;
+			if($frequenceSoin4 != null)
+				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3 ." - ". $frequenceSoin4;
 
 
-	if($heure2 != null)
-		$date = $heure1. " - ". $heure2;
-	if($heure3 != null)
-		$date = $heure1. " - ". $heure2 . " - ". $heure3;
-	if($heure4 != null)
-		$date = $heure1. " - ". $heure2 . " - ". $heure3 ." - ". $heure4;
+			if($heure2 != null)
+				$date = $heure1. " - ". $heure2;
+			if($heure3 != null)
+				$date = $heure1. " - ". $heure2 . " - ". $heure3;
+			if($heure4 != null)
+				$date = $heure1. " - ". $heure2 . " - ". $heure3 ." - ". $heure4;
 
 
 
-	$bdd->exec("INSERT INTO `liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')") or die(print_r($bdd->ErrorInfo()));
+			$bdd->exec("INSERT INTO `liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')") or die(print_r($bdd->ErrorInfo()));
 
-
-
-	echo "reussi";
+		echo "success";
+	}else{
+		echo "existe";
+	}
 ?>

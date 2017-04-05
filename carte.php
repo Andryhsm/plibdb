@@ -25,6 +25,9 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <link rel="stylesheet" id="wds_font-awesome-css" href="./others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootsrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.miin.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
 
         <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
@@ -134,7 +137,23 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             <div id="alchem-home-sections">
+            <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror">tester</button>
 
+            <div class="modal" id="loginerror">
+                  <div class="modal-dialog">
+                    <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
+                        <h4 class="modal-title" style="text-align: center;">Information !</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="warning" id="info"></div>
+                      </div>
+                      <div class="modal-footer">
+                      </div>
+                    </div>
+                  </div>
+            </div>
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
 
@@ -160,8 +179,13 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 </div>          
             </footer>
         </div>  
+        
+     
+
+
         <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             /* <![CDATA[ */
             var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
@@ -240,7 +264,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     type: 'GET',
                     success: function(data){
                         var json = $.parseJSON(data);
-                        alert(json.length);
+                        //alert(json.length);
                         for (var i = json.length - 1; i >= 0; i--) {
                             var infirmier = $.parseJSON(json[i]);
                             if(typeof infirmier.latLng != "undefined"){
@@ -298,11 +322,28 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             type: 'GET',
                         success: function(data){
                             if(data === "reussi"){
-                                alert("Votre demande est bien envoyer !");
+                                
+                                $('#info').html('<p> Votre demande est vient envoyer . </p>');
+                                $('#triggerwarning').trigger('click');
+                                setTimeout(function() {
+                                $('#ferme').trigger('click');
+                                }, 40000);
+
+                            }else if(data === "existe"){                             
+                                $('#info').html('<p> Vous avez deja envoyer une demande </p>');
+                                $('#triggerwarning').trigger('click');
+                                setTimeout(function() {
+                                $('#ferme').trigger('click');
+                                }, 40000);
+                            }else{
                             }
                         },
                         error: function(){
-                            alert("Impossible de charger rendez-vous.php");
+                            $('#info').html('<p> Veuillez indiquer un adresse e-mail valide et un mot de passe. </p>');
+                                $('#triggerwarning').trigger('click');
+                                setTimeout(function() {
+                                $('#ferme').trigger('click');
+                                }, 40000);
                         }
                     });
                 }
