@@ -20,6 +20,20 @@
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
         <link rel="stylesheet" href="./others/index.css" type="text/css" media="all">
 
+
+
+
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
+
+
+
+
+
         <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
         <script type="text/javascript">
@@ -134,6 +148,31 @@
               cursor: pointer;
             }
 
+            .logo
+            {
+                position: absolute;
+                z-index: 9;
+                left: 5%;
+            }
+
+            li>a:hover
+            {
+                font-size: 1.4em;
+                color:  #fff;
+                text-decoration: none;
+            }
+
+            li>a
+            {
+                background-color: transparent;
+                font-size: 1.4em;
+                color: #fff;
+                text-decoration: none;
+            }
+            .modal{
+                margin-top: 5rem;
+            }
+
         </style>
 
         
@@ -150,57 +189,35 @@
         <!--/end meta tags by Kiwi Social Sharing Plugin -->
        </head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
-        <div class="wrapper ">
-            <div class="top-wrap">
-                <header class="header-style-1 header-wrap  logo-left">
-                    <div class="main-header " style="display: block;">
-                        <div class="container">
-                            <div class="logo-box alchem_header_style alchem_default_logo">
-                                <a href="./index.html">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                </a>
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./index.html"><span class="menu-item-label">Accueil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./login.html"><span class="menu-item-label">Trouver une infirmière</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="login.html"><span class="menu-item-label">Connexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
-                    <!-- sticky header -->
-                    <div class="fxd-header logo-left" style="top: 0px; display: none;">
-                        <div class="container">
-                            <div class="logo-box text-left alchem_header_style alchem_default_logo">
-                                <a href="./index.html">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                </a>
+        
+                            
 
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main1" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./index.html"><span class="menu-item-label">Accueil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./login.html"><span class="menu-item-label">Trouver une infirmière</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="login.html"><span class="menu-item-label">Connexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
+                            <nav class="navbar navbar-default navbar-fixed-top">
+                              <div class="container-fluid">
+                                <div class="navbar-header">
+                                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                  </button>
+                                    <div class="logo">
+                                        <a href="#"><img src="img/logo.png"></a>
+                                    </div>
+                                </div>
 
-                    <div class="clear"></div>
-                </header>  
-            </div>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                  <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="./index.html">Accueil</a></li>
+                                    <li><a href="./login.html">Trouver une infirmière</a></li>
+                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li><a href="login.html">Connexion</a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </nav>
+
+                    
             <div id="alchem-home-sections">
                 <section class="section magee-section alchem-home-section-0 alchem-home-style-0 " id="section-1">
                     <div class="multi-carousel home-banner-slider">
@@ -209,83 +226,85 @@
 
 
 
-                                <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1500px;height:600px;overflow:hidden;visibility:hidden;">
-                                    <!-- Loading Screen -->
-                                    <div data-u="loading" class="jssorl-oval" style="position:absolute;top:0px;left:0px;text-align:center;background-color:rgba(0,0,0,0.7);">
-                                        <img style="margin-top:-19.0px;position:relative;top:50%;width:38px;height:38px;" src="img/oval.svg" />
-                                    </div>
-                                    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1500px;height:600px;overflow:hidden;">
-                                        <div>
-                                            <img data-u="image" src="img/sliderimg_001.png" />
-                                            <div style="position:absolute;top:200px;left:450px;width:600px;height:120px;z-index:0;border-radius: 8px;">
-                                                <div style="position:absolute;left:167px;font-size:80px;color:#efb121;line-height:0px; text-align: center;">OU.LIB</div>
-                                                <div style="position:absolute;top:60px;left:15px;width:570px;height:40px;z-index:0;font-size:22px;color:#ffffff;line-height:38px;text-align: center;">Trouver une libérale a domicile.</div>
-                                            </div>
-                                            <div style="position:absolute;top:370px;left:350px;width:800px;height:150px;z-index:0;background-color:rgba(0,0,0,0.5);border-radius: 8px;">
-                                                <div style="position:absolute;top:40px;left:15px;width:500px;height:40px;z-index:0;font-size:22px;color:#000000;line-height:38px;">
+                                <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                                      
+                                      <ol class="carousel-indicators">
+                                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                                        <li data-target="#mycarousel" data-slide-to="4"></li>
+                                      </ol>
 
-                                                    <table style="border-style: none; width: 100%;">
-                                                        <td>
-                                                            <a href="./patient-inscription.html" style="margin-left: 72%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis patient</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="./infirmiere-inscription.html" style="margin-left: 125%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis infirmièr(e)</a>
-                                                        </td>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                      
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item">
+                                            <img src="img/sliderimg_001.png" data-color="lightblue" alt="First Image">
                                         </div>
-                                        <div>
-                                            <img data-u="image" src="img/sliderimg_003.png" />
-                                            <div style="position:absolute;top:200px;left:450px;width:600px;height:120px;z-index:0;border-radius: 8px;">
-                                                <div style="position:absolute;left:167px;font-size:80px;color:#efb121;line-height:0px; text-align: center;">OU.LIB</div>
-                                                <div style="position:absolute;top:60px;left:15px;width:570px;height:40px;z-index:0;font-size:22px;color:#ffffff;line-height:38px;text-align: center;">Trouver facilement les libéraux autour de vous. </div>
-                                            </div>
-                                            <div style="position:absolute;top:370px;left:350px;width:800px;height:150px;z-index:0;background-color:rgba(0,0,0,0.5);border-radius: 8px;">
-                                                <div style="position:absolute;top:40px;left:15px;width:500px;height:40px;z-index:0;font-size:22px;color:#000000;line-height:38px;">
 
-                                                    <table style="border-style: none; width: 100%;">
-                                                        <td>
-                                                            <a href="./patient-inscription.html" style="margin-left: 72%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis patient</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="./infirmiere-inscription.html" style="margin-left: 125%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis infirmièr(e)</a>
-                                                        </td>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                        <div class="item">
+                                            <img src="img/sliderimg_002.png" data-color="lightblue" alt="First Image">
                                         </div>
-                                        <div>
-                                            <img data-u="image" src="img/sliderimg_002.png" />
-                                            <div style="position:absolute;top:200px;left:450px;width:600px;height:120px;z-index:0;border-radius: 8px;">
-                                                <div style="position:absolute;left:167px;font-size:80px;color:#efb121;line-height:0px; text-align: center;">OU.LIB</div>
-                                                <div style="position:absolute;top:60px;left:15px;width:570px;height:40px;z-index:0;font-size:22px;color:#ffffff;line-height:38px;text-align: center;">Trouver facilement les libéraux autour de vous</div>
-                                            </div>
-                                            <div style="position:absolute;top:370px;left:350px;width:800px;height:150px;z-index:0;background-color:rgba(0,0,0,0.5);border-radius: 8px;">
-                                                <div style="position:absolute;top:40px;left:15px;width:500px;height:40px;z-index:0;font-size:22px;color:#000000;line-height:38px;">
 
-                                                    <table style="border-style: none; width: 100%;">
-                                                        <td>
-                                                            <a href="./patient-inscription.html" style="margin-left: 72%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis patient</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="./infirmiere-inscription.html" style="margin-left: 125%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis infirmièr(e)</a>
-                                                        </td>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                        <div class="item">
+                                            <img src="img/sliderimg_003.png" data-color="lightblue" alt="First Image">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/sliderimg_002.png" data-color="lightblue" alt="First Image">
+                                        </div>
+
+                                        <div class="item">
+                                            <img src="img/sliderimg_001.png" data-color="lightblue" alt="First Image">
                                         </div>
                                     </div>
-                                    <!-- Bullet Navigator -->
-                                    <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
-                                        <!-- bullet navigator item prototype -->
-                                        <div data-u="prototype" style="width:16px;height:16px;"></div>
-                                    </div>
-                                    <!-- Arrow Navigator -->
-                                    <span data-u="arrowleft" class="jssora22l" style="top:0px;left:8px;width:40px;height:58px;" data-autocenter="2"></span>
-                                    <span data-u="arrowright" class="jssora22r" style="top:0px;right:8px;width:40px;height:58px;" data-autocenter="2"></span>
+
+                                      
+                                    <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+
+                                    <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
-                                <script type="text/javascript">jssor_1_slider_init();</script>
+
+
+
+                                <div id = "div1" class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s">
+                                    <div id = "div2">
+                                        OU.LIB
+                                    </div>
+                                    <div id = "div3" class="wow fadeInUp animated cd-headline slide" data-wow-delay=".9s">
+                                        Trouver une libérale a domicile.
+                                    </div>
+                                </div>
+                                <div id = "div4" class="wow fadeInUp animated" data-wow-delay=".9s" align = "center">
+                                    <div id = "div5">
+                                        <table id = "table_carousel">
+                                            <td id = "td_bouton" class="cherche-form form-inline wow fadeInUp animated" data-wow-delay=".50s">
+                                                <a href="./patient-inscription.html" style="margin-left: 35%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis patient</a>
+                                            </td>
+                                            <td id = "td_bouton" class="cherche-form form-inline wow fadeInUp animated" data-wow-delay=".50s">
+                                                <a href="./infirmiere-inscription.html" style="margin-left: 80%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis infirmièr(e)</a>
+                                            </td>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+                                <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js'>
+                                </script>
+
+                                <script src="js/slider_js.js"></script>
+
+
+
+        
 
                             </div>
                         </div>
@@ -417,5 +436,5 @@
                                       $('#returnOnTop').fadeOut();
                               });
                             </script>
-                        </body>
-                        </html>
+ </body>
+</html>
