@@ -80,7 +80,7 @@
             #map {
                 width: 80vw;
                 height: 50vh;
-                background: yellow;
+                background: white;
             }
         </style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
@@ -165,7 +165,7 @@
 
                                                 <div class="row col-lg-offset-2 col-md-offset-2">
                                                     <div id="image_preview">
-                                                        <img class="thumbnail img-responsive hidden" style="vertical-align: center;" width="300px" heigth="300px">
+                                                        <img class="thumbnail img-responsive hidden" style="vertical-align: center;" width="300px" heigth="300px"/>
                                                         <figcaption id="titre"></figcaption>
                                                     </div>
                                                 </div>
@@ -259,8 +259,7 @@
                                                             element.parentNode.removeChild(element);
                                                             var element = document.getElementById("cica3");
                                                             element.parentNode.removeChild(element);
-                                                        }
-                                                        else if (selection === "Stomarhérapie")
+                                                        } else if (selection === "Stomarhérapie")
                                                         {
                                                             var element = document.getElementById("stoma1");
                                                             element.parentNode.removeChild(element);
@@ -268,8 +267,7 @@
                                                             element.parentNode.removeChild(element);
                                                             var element = document.getElementById("stoma3");
                                                             element.parentNode.removeChild(element);
-                                                        }
-                                                        else if (selection === "Perfusion")
+                                                        } else if (selection === "Perfusion")
                                                         {
                                                             var element = document.getElementById("perf1");
                                                             element.parentNode.removeChild(element);
@@ -277,8 +275,7 @@
                                                             element.parentNode.removeChild(element);
                                                             var element = document.getElementById("perf3");
                                                             element.parentNode.removeChild(element);
-                                                        }
-                                                        else if (selection === "Sondage")
+                                                        } else if (selection === "Sondage")
                                                         {
                                                             var element = document.getElementById("sondage1");
                                                             element.parentNode.removeChild(element);
@@ -486,7 +483,7 @@
                                                                 {types: ['geocode']});
 
                                                         map = new google.maps.Map(document.getElementById('map'), {
-                                                            zoom: 13,
+                                                            zoom: 18,
                                                             center: {lat: -34.397, lng: 150.644}
                                                         });
 
@@ -509,15 +506,24 @@
                                                                 }
                                                                 marker = new google.maps.Marker({
                                                                     map: resultsMap,
-                                                                    position: results[0].geometry.location
+                                                                    position: results[0].geometry.location,
+                                                                    draggable: true
                                                                 });
+
                                                                 var latLng = results[0].geometry.location.lat;
                                                                 var position = marker.getPosition();
-                                                                // alert(results[0].geometry.location);
+
+                                                                var contentString = "Votre emplacement est il vraiment ici ? <br/>";
+                                                                contentString += " Si non, veuillez deplacer le maqueur s'il vous plaît";
+
                                                                 var infoBull = new google.maps.InfoWindow({
-                                                                    content: "Votre lieu d'intervention est ici ?"
+                                                                    content: contentString
                                                                 });
+
                                                                 infoBull.open(map, marker);
+
+                                                                // alert(results[0].geometry.location);
+
                                                                 $("#latLng").val(position);
                                                             } else {
                                                                 alert('Geocode was not successful for the following reason: ' + status);
@@ -585,8 +591,7 @@
                         if (server_response === "succes  ")
                         {
                             window.location.replace("liste.php");
-                        }
-                        else
+                        } else
                         {
                             $('#erreur_inscription').html('<p>' + server_response + '</p>');
                             $('#triggerwarning').trigger('click');
