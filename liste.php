@@ -11,7 +11,7 @@ include_once "./lib-php/cnx.php";
 <html lang="fr-FR" class="no-js">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <META http-equiv="REFRESH" content="20">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -149,40 +149,40 @@ include_once "./lib-php/cnx.php";
 
                             <div class="liste">
                                 <?php
-                                $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
+                                $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
                                 $b = FALSE;
                                 while ($data = $req->fetch()) {
                                     ?>
-                                        <table class="table table-hover">
-                                            <tbody id="content">
-                                                <tr class="<?php $b = TRUE; echo($data['id']); ?>">
-                                                    <td width='15%'>
-                                                        <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                                    </td>
-                                                    <td width='45%'>
-                                                        <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-                                                        <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                        <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                        <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
-                                                        <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                                    </td>
-                                                    <td width='40%'>
-                                                        <br><br>
-                                                        <?php echo($data['commentaire']); ?>
-                                                        <br><br><br>
-                                                        <div class="pull-right">
-                                                            <a class="btn btn-success accepter">Accepter</a>&nbsp;&nbsp
-                                                            <a class="btn btn-danger refuser">Réfuser</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <?php
-                                    } if($b == FALSE) {
-                                        echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
-                                    }
-                                
+                                    <table class="table table-hover">
+                                        <tbody id="content">
+                                            <tr class="<?php $b = TRUE;
+                                echo($data['id']); ?>">
+                                                <td width='15%'>
+                                                    <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
+                                                </td>
+                                                <td width='45%'>
+                                                    <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
+    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
+                                                    <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
+                                                    <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
+                                                    <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
+                                                </td>
+                                                <td width='40%'>
+                                                    <br><br>
+    <?php echo($data['commentaire']); ?>
+                                                    <br><br><br>
+                                                    <div class="pull-right">
+                                                        <a class="btn btn-success accepter">Accepter</a>&nbsp;&nbsp
+                                                        <a class="btn btn-danger refuser">Réfuser</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                } if ($b == FALSE) {
+                                    echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
+                                }
                                 ?>
                             </div>
                         </div>
