@@ -70,10 +70,10 @@
                                                         $_SESSION['frequence-soin3'] = $patient['frequence-soin3'];
                                                         $_SESSION['frequence-soin4'] = $patient['frequence-soin4'];
                                                         $_SESSION['photo'] = $patient['photo'];
-							$_SESSION['heure1'] = $patient['heure1'];
-                                                        $_SESSION['heure2'] = $patient['heure2'];
-                                                        $_SESSION['heure3'] = $patient['heure3'];
-                                                        $_SESSION['heure4'] = $patient['heure4'];
+//							$_SESSION['heure1'] = $patient['heure1'];
+//                                                        $_SESSION['heure2'] = $patient['heure2'];
+//                                                        $_SESSION['heure3'] = $patient['heure3'];
+//                                                        $_SESSION['heure4'] = $patient['heure4'];
 
 							echo("Patient");
 						} else 

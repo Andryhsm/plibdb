@@ -236,24 +236,24 @@ $data = $req->fetch();
                                                                 <div class="">
                                                                     <?php if ($data['type-soinP1'] != "") { ?>
                                                                         <p>
-                                                                            <b><?php echo($data['type-soinP1']); ?></b> : <u><?php echo($data['frequence-soin1']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure1']) ?></u></b>
+                                                                            <b><?php echo($data['type-soinP1']); ?></b> : <?php echo($data['frequence-soin1']) ?> fois par jour
                                                                         </p>
                                                                     <?php } ?>
                                                                     <?php if ($data['type-soinP2'] != "") { ?>
                                                                         <p>
-                                                                            <b><?php echo($data['type-soinP2']); ?></b> : <u><?php echo($data['frequence-soin2']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure2']) ?></u></b>
+                                                                            <b><?php echo($data['type-soinP2']); ?></b> : <?php echo($data['frequence-soin2']) ?> fois par jour
                                                                         </p>
                                                                     <?php } ?>
                                                                     <?php if ($data['type-soinP3'] != "") { ?>
                                                                         <p>
-                                                                            <b><?php echo($data['type-soinP3']); ?></b> : <u><?php echo($data['frequence-soin3']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure3']) ?></u></b>
+                                                                            <b><?php echo($data['type-soinP3']); ?></b> : <?php echo($data['frequence-soin3']) ?> fois par jour
                                                                         </p>
                                                                     <?php } ?>
                                                                     <?php if ($data['type-soinP4'] != "") { ?>
                                                                         <p>
-                                                                            <b><?php echo($data['type-soinP4']); ?></b> : <u><?php echo($data['frequence-soin4']) ?> fois</u> par jour, aux heures <b><u><?php echo($data['heure4']) ?></u></b>
-                                                                        </p>
-                                                                    <?php } ?>
+                                                                            <b><?php echo($data['type-soinP4']); ?></b> : <u><?php echo($data['frequence-soin4']) ?> fois par jour
+                                                                            </p>
+                                                                        <?php } ?>
                                                                 </div>
                                                                 <div class="btn btn-warning" id="changesoins" onClick="changeSoins();"> Changer mes informations de soins</div>
                                                             </div>
@@ -284,6 +284,13 @@ $data = $req->fetch();
                                                                         <option value="3">X 3</option>
                                                                         <option value="4">X 4</option>
                                                                         <option value="5">X 5</option>
+                                                                        <option value="6">X 6</option>
+                                                                        <option value="7">X 7</option>
+                                                                        <option value="8">X 8</option>
+                                                                        <option value="9">X 9</option>
+                                                                        <option value="10">X 10</option>
+                                                                        <option value="11">X 11</option>
+                                                                        <option value="12">X 12</option>
                                                                     </select>                    
                                                                 </div>
                                                             </div>
@@ -293,12 +300,12 @@ $data = $req->fetch();
                                                                     $('[name="type-soinP1"]').val("<?php echo($data['type-soinP1']) ?>");
                                                                 });
                                                             </script>
-                                                            <div class="form-group">
-                                                                <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" required="" placeholder="heure par fréquence de soin" class="form-control" name="heure1" id="heure1">
-                                                                </div>
-                                                            </div>
+                                                            <!--                                                            <div class="form-group">
+                                                                                                                            <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
+                                                                                                                            <div class="col-sm-9">
+                                                                                                                                <input type="text" required="" placeholder="heure par fréquence de soin" class="form-control" name="heure1" id="heure1">
+                                                                                                                            </div>
+                                                                                                                        </div>-->
 
                                                             <script>
 
@@ -367,15 +374,22 @@ $data = $req->fetch();
                                                                             <option value="3">X 3</option>
                                                                             <option value="4">X 4</option>
                                                                             <option value="5">X 5</option>
+                                                                            <option value="6">X 6</option>
+                                                                            <option value="7">X 7</option>
+                                                                            <option value="8">X 8</option>
+                                                                            <option value="9">X 9</option>
+                                                                            <option value="10">X 10</option>
+                                                                            <option value="11">X 11</option>
+                                                                            <option value="12">X 12</option>
                                                                         </select>                    
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
-                                                                    <div class="col-sm-9">
-                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure2" id="heure2">
-                                                                    </div>
-                                                                </div>
+                                                                <!--                                                                <div class="form-group">
+                                                                                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
+                                                                                                                                    <div class="col-sm-9">
+                                                                                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure2" id="heure2">
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
                                                             </div>
                                                             <script>
 
@@ -436,15 +450,22 @@ $data = $req->fetch();
                                                                             <option value="3">X 3</option>
                                                                             <option value="4">X 4</option>
                                                                             <option value="5">X 5</option>
+                                                                            <option value="6">X 6</option>
+                                                                            <option value="7">X 7</option>
+                                                                            <option value="8">X 8</option>
+                                                                            <option value="9">X 9</option>
+                                                                            <option value="10">X 10</option>
+                                                                            <option value="11">X 11</option>
+                                                                            <option value="12">X 12</option>
                                                                         </select>                    
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
-                                                                    <div class="col-sm-9">
-                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure3" id="heure3">
-                                                                    </div>
-                                                                </div>
+                                                                <!--                                                                <div class="form-group">
+                                                                                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
+                                                                                                                                    <div class="col-sm-9">
+                                                                                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure3" id="heure3">
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
                                                             </div>
                                                             <script>
 
@@ -497,15 +518,22 @@ $data = $req->fetch();
                                                                             <option value="3">X 3</option>
                                                                             <option value="4">X 4</option>
                                                                             <option value="5">X 5</option>
+                                                                            <option value="6">X 6</option>
+                                                                            <option value="7">X 7</option>
+                                                                            <option value="8">X 8</option>
+                                                                            <option value="9">X 9</option>
+                                                                            <option value="10">X 10</option>
+                                                                            <option value="11">X 11</option>
+                                                                            <option value="12">X 12</option>
                                                                         </select>                    
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
-                                                                    <div class="col-sm-9">
-                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure4" id="heure4">
-                                                                    </div>
-                                                                </div>
+                                                                <!--                                                                <div class="form-group">
+                                                                                                                                    <label for="heure" class="col-sm-2 control-label">Heure des soins:</label>
+                                                                                                                                    <div class="col-sm-9">
+                                                                                                                                        <input type="text" placeholder="heure par fréquence de soin" class="form-control" name="heure4" id="heure4">
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
                                                             </div>
 
                                                         </div>
@@ -595,9 +623,7 @@ $data = $req->fetch();
         <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../others/owl.carousel.min.js.téléchargement"></script>
         <script type="text/javascript">
-                                                                        /* <![CDATA[ */
-                                                                        var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
-                                                                        /* ]]> */
+
         </script>
         <script type="text/javascript" src="../others/main.js.téléchargement">
         </script>
@@ -622,10 +648,10 @@ $data = $req->fetch();
                 $('[name="frequence-soin3"]').val("");
                 $('[name="frequence-soin4"]').val("");
 
-                $('[name="heure1"]').val("");
-                $('[name="heure2"]').val("");
-                $('[name="heure3"]').val("");
-                $('[name="heure4"]').val("");
+//                $('[name="heure1"]').val("");
+//                $('[name="heure2"]').val("");
+//                $('[name="heure3"]').val("");
+//                $('[name="heure4"]').val("");
             }
             ;
 
@@ -666,7 +692,7 @@ $data = $req->fetch();
                     {
                         if (server_response === "succes")
                         {
-                            window.location.href = "carte.html";
+                            window.location.href = "carte.php";
                         }
                         else
                         {
@@ -697,10 +723,10 @@ $data = $req->fetch();
                 $('[name="frequence-soin3"]').val("<?php echo($data['frequence-soin3']); ?>");
                 $('[name="frequence-soin4"]').val("<?php echo($data['frequence-soin4']); ?>");
 
-                $('[name="heure1"]').val("<?php echo($data['heure1']); ?>");
-                $('[name="heure2"]').val("<?php echo($data['heure2']); ?>");
-                $('[name="heure3"]').val("<?php echo($data['heure3']); ?>");
-                $('[name="heure4"]').val("<?php echo($data['heure4']); ?>");
+//                $('[name="heure1"]').val("<?php // echo($data['heure1']);  ?>");
+//                $('[name="heure2"]').val("<?php // echo($data['heure2']);  ?>");
+//                $('[name="heure3"]').val("<?php // echo($data['heure3']);  ?>");
+//                $('[name="heure4"]').val("<?php // echo($data['heure4']);  ?>");
 
                 $('#returnOnTop').hide();
                 $('#returnOnTop').click(function () {
