@@ -23,10 +23,10 @@ $frequence_soin1 = htmlspecialchars($_POST['frequence-soin1']);
 $frequence_soin2 = htmlspecialchars($_POST['frequence-soin2']);
 $frequence_soin3 = htmlspecialchars($_POST['frequence-soin3']);
 $frequence_soin4 = htmlspecialchars($_POST['frequence-soin4']);
-$heure1 = htmlspecialchars($_POST['heure1']);
-$heure2 = htmlspecialchars($_POST['heure2']);
-$heure3 = htmlspecialchars($_POST['heure3']);
-$heure4 = htmlspecialchars($_POST['heure4']);
+//$heure1 = htmlspecialchars($_POST['heure1']);
+//$heure2 = htmlspecialchars($_POST['heure2']);
+//$heure3 = htmlspecialchars($_POST['heure3']);
+//$heure4 = htmlspecialchars($_POST['heure4']);
 
 $dossier = '../image-person/';
 
@@ -35,29 +35,29 @@ $fichier = basename($_FILES['photo']['name']);
 if ($fichier == "") {
     if (($mdp == "") && ($conf_mdp == "")) {
 
-        if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "") && ($heure1 = "") && ($heure2 == "") && ($heure3 == "") && ($heure4 == "")) {
+        if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "")) {
 
             $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-            echo 'succes';
+            echo 'Profil mise à jour';
         } else {
 
-            $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' ,`heure1` = '" . $heure1 . "',`heure2` = '" . $heure2 . "',`heure3` = '" . $heure3 . "',`heure4` ='" . $heure4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
+            $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-            echo 'succes';
+            echo 'Profil mise à jour';
         }
     } else {
 
         if ($mdp == $conf_mdp) {
 
-            if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "") && ($heure1 = "") && ($heure2 == "") && ($heure3 == "") && ($heure4 == "")) {
+            if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "")) {
                 $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                echo 'succes';
+                echo 'Profil mise à jour';
             } else {
-                $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' ,`heure1` = '" . $heure1 . "',`heure2` = '" . $heure2 . "',`heure3` = '" . $heure3 . "',`heure4` ='" . $heure4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
+                $bdd->exec("UPDATE `oulib_patient` SET `nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                echo 'succes';
+                echo 'Profil mise à jour';
             }
         } else {
             echo "Mot de passe non identique";
@@ -83,29 +83,29 @@ if ($fichier == "") {
         if (move_uploaded_file($_FILES['photo']['tmp_name'], $dossier . $fichier)) {
             if (($mdp == "") && ($conf_mdp == "")) {
 
-                if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "") && ($heure1 = "") && ($heure2 == "") && ($heure3 == "") && ($heure4 == "")) {
+                if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "")) {
 
                     $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                    echo 'succes';
+                    echo 'Profil mise à jour';
                 } else {
 
-                    $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' ,`heure1` = '" . $heure1 . "',`heure2` = '" . $heure2 . "',`heure3` = '" . $heure3 . "',`heure4` ='" . $heure4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
+                    $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                    echo 'succes';
+                    echo 'Profil mise à jour';
                 }
             } else {
 
                 if ($mdp == $conf_mdp) {
 
-                    if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "") && ($heure1 = "") && ($heure2 == "") && ($heure3 == "") && ($heure4 == "")) {
+                    if (($type_soin1 == "") && ($type_soin2 == "") && ($type_soin3 == "") && ($type_soin4 == "") && ($frequence_soin1 == "") && ($frequence_soin2 == "") && ($frequence_soin3 == "") && ($frequence_soin4 == "")) {
                         $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                        echo 'succes';
+                        echo 'Profil mise à jour';
                     } else {
-                        $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' ,`heure1` = '" . $heure1 . "',`heure2` = '" . $heure2 . "',`heure3` = '" . $heure3 . "',`heure4` ='" . $heure4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
+                        $bdd->exec("UPDATE `oulib_patient` SET `photo` = '" . $fichier . "',`nomP` = '" . $nom . "',`prenomP` = '" . $prenom . "',`emailP` = '" . $email . "',`mdpP` = '" . $mdp . "',`telP` = '" . $tel . "',`rueP` = '" . $rue . "',`code-postalP` = '" . $code_postal . "',`villeP` = '" . $ville . "',`code-acces` = '" . $code_acces . "',`etage` = '" . $etage . "',`info-sup` = '" . $info_sup . "',`type-soinP1` ='" . $type_soin1 . "',`type-soinP2` = '" . $type_soin2 . "',`type-soinP3` = '" . $type_soin3 . "',`type-soinP4` = '" . $type_soin4 . "',`frequence-soin1` = '" . $frequence_soin1 . "',`frequence-soin2` = '" . $frequence_soin2 . "',`frequence-soin3` = '" . $frequence_soin3 . "',`frequence-soin4` = '" . $frequence_soin4 . "' WHERE `id`= '" . $id . "'") or die(print_r($bdd->ErrorInfo()));
 
-                        echo 'succes';
+                        echo 'Profil mise à jour';
                     }
                 } else {
                     echo "Mot de passe non identique";
