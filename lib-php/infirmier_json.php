@@ -6,7 +6,7 @@
 		header("Content-Type: text/javascript");
 
 		$donnees = array();
-		$reponse = $bdd->query("SELECT * FROM infirmiere");
+		$reponse = $bdd->query("SELECT * FROM oulib_infirmiere");
 	
 		while($data = $reponse->fetch(PDO::FETCH_OBJ))
 		{

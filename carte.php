@@ -435,7 +435,9 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                 $('#ferme').trigger('click');
                             }, 40000);
 
+
                         } else if (data === "existe") {
+                            
                             $('#info').html('<p> Vous avez deja envoyer une demande </p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {

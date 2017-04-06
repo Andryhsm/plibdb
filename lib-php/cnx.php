@@ -1,7 +1,7 @@
 <?php
 try
 {
-	$bdd = new PDO('mysql:host=localhost;port=3306;dbname=ouinflib', 'root', '');
+	$bdd = new PDO('mysql:host=imedsoftcibast.mysql.db;dbname=imedsoftcibast', 'imedsoftcibast', '1groupeDrn');
 }
 catch (Exception $e)
 {

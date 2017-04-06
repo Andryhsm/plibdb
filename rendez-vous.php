@@ -147,7 +147,7 @@ include_once "./lib-php/cnx.php";
                         <div class="container alchem_section_4_model">
                             <div class="liste">
                             <?php
-                            $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
+                            $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'accepter'");
 
                             $b = FALSE;
 

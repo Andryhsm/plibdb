@@ -149,7 +149,7 @@ include_once "./lib-php/cnx.php";
 
                             <div class="liste">
                                 <?php
-                                $req = $bdd->query("SELECT * FROM liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
+                                $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
                                 $b = FALSE;
                                 while ($data = $req->fetch()) {
                                     ?>
