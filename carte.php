@@ -209,7 +209,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                     <div class="warning" id="infoI"></div>    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" id="closeMI" data-dismiss="modal">OK</button>
                                 </div>
                             </div>
                         </div>
@@ -425,12 +424,14 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                                 p += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
                                 p += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
                                 p += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
+                                p += "<div id='input_date'><p><strong>Heure de soin : </strong>&nbsp;&nbsp;&nbsp;<input id='heure_soin' type='text' placeholder='Heure de soin' /></p>";
+                                p += "<p><strong>Date : </strong><input type='date' id='date_soin' placeholder=\"Date d\'intervention\"/></p></div>";
                                 p += "</div>";
                                 p += "<div class='col-lg-4'>";
                                 p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
                                 p += "</div>";
                                 p += "<div class='col-lg-12'>";
-                                p += "<center><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
+                                p += "<center></br></br><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
                                 p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\"" + infirmier.emailI + "\");' value='Prendre rendez-vous' /></center>";
                                 p += "</div>";
                                 p += "</div>";
@@ -459,17 +460,38 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
                                 marker.addListener('click', function () {
                                     // infoW.open(map, marker);
+                                    $.ajax({
+                                        url: 'lib-php/lib/nb_frequence_soin.php',
+                                        type: 'default GET (Other values: POST)',
+                                        dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                                        data: {param1: 'value1'},
+                                    })
+                                    .done(function() {
+                                        console.log("success");
+                                    })
+                                    .fail(function() {
+                                        console.log("error");
+                                    })
+                                    .always(function() {
+                                        console.log("complete");
+                                    });
+                                    
+
                                     <?php echo "var emailP = \"".$_SESSION["email"]."\";"; ?>
                                     $.ajax({
                                         url: 'lib-php/lib/savoir_demande.php?emailP='+emailP,
                                         type: 'GET',
                                         success: function(data){
                                             if(data === "inexiste"){
-                                                $('#infoI').html(p);
-                                                $('#triggerwarningI').trigger('click');
+                                           //     alert("Demande est inexiste");
+                                               $('#infoI').html(p);
+                                               $('#triggerwarningI').trigger('click');
+                                           
                                             }else if(data === "existe"){
-                                                $('#infoI').html(p2);
-                                                $('#triggerwarningI').trigger('click');
+                                               $('#infoI').html(p2);
+                                               $('#triggerwarningI').trigger('click');
+                                            
+                                            //alert("La demande est existe ! ");
                                             }else{
                                                 alert("Une erreur php dans savoir_demande.php");
                                             }
@@ -500,7 +522,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     type: 'GET',
                     success: function (data) {
                         if (data === "reussi") {
-                            $('#info').html('<p> Votre demande est vient envoyer . </p>');
+                            $('#info').html('<p> Votre demande est bien envoyer . </p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
@@ -510,7 +532,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                         } else if (data === "existe") {
                             var nom = $('#nomInfirmier').html();
                            
-                            $('#info').html('<p> Vous avez deja envoyer une demande à <strong>'+nom+'</strong> </p>');
+                            $('#info').html('<p> Votre demande à <strong>'+nom+'</strong> est dejà envoyer !</p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
