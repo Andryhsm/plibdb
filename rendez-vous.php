@@ -27,16 +27,6 @@ include_once "./lib-php/cnx.php";
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
 
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-
 
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -102,10 +92,10 @@ include_once "./lib-php/cnx.php";
                             </button>
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -126,10 +116,10 @@ include_once "./lib-php/cnx.php";
                             </button>
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main1" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -140,6 +130,7 @@ include_once "./lib-php/cnx.php";
                 </header>  
             </div>
             <div id="alchem-home-sections">
+                <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
 
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
@@ -274,6 +265,26 @@ include_once "./lib-php/cnx.php";
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
+
+                var auto_refresh = setInterval(
+                    function() 
+                    {
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "badges_inf.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#badges').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 1000);
             });
 
             $(window).scroll(function ()

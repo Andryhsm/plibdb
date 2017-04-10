@@ -1,3 +1,15 @@
+<?php
+session_start();
+if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
+    header("Location: ./login.html");
+}
+
+include_once "cnx.php";
+
+$req = $bdd->query("SELECT * FROM oulib_infirmiere WHERE emailI = '" . $_SESSION['email'] . "'");
+$data = $req->fetch();
+?>
+
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -19,28 +31,7 @@
         <link rel="stylesheet" id="wds_font-awesome-css" href="../others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="../others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="../others/style.css" type="text/css" media="all">
-        <link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
         <link href="../bootstrap/css/paper.css" rel="stylesheet">
-
-        <script type="text/javascript" src="../others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-
-        <script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
-        <script type="text/javascript"  src="../bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
-            /* ]]> */
-        </script>
-        <script type="text/javascript" src="../others/main.js.téléchargement"></script>
 
         <style type="text/css">
             .content
@@ -82,10 +73,10 @@
                     </button>
                     <nav class="site-nav" role="navigation" style="">
                         <ul id="menu-main" class="main-nav">
-                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                             <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                             <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.html"><span class="menu-item-label">Contact</span></a></li>
+                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.php"><span class="menu-item-label">Contact</span></a></li>
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                         </ul>                    
                     </nav>
@@ -106,10 +97,10 @@
                     </button>
                     <nav class="site-nav" role="navigation" style="">
                         <ul id="menu-main1" class="main-nav">
-                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                             <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                             <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.html"><span class="menu-item-label">Contact</span></a></li>
+                            <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact2.php"><span class="menu-item-label">Contact</span></a></li>
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                         </ul>                  
                     </nav>
@@ -204,7 +195,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-3" id="addon-date">Choisissez votre date de livraison</label>
                                             <div class="col-lg-5 hide" id="datelivraison">
-                                                <input type="text" class="form-control" id="datepicker" aria-describedby="addon-date" name="data[Renouvellement][datelivraison]">
+                                                <input type="text" class="form-control" id="datepicker" aria-describedby="addon-date" name="data[Renouvellement][datelivraison]" placeholder="Votre date de livraison" readonly>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -355,6 +346,8 @@
                                             </div>
                                         </fieldset>
 
+                <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
+
                                     </div>
                                 </div>
 
@@ -488,7 +481,7 @@
                 });
             });
         </script>
-        <script type="text/javascript" src="assets/js/datepicker.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/datepicker.js"></script>
         <script type="text/javascript">
             $(document).ready(function ()
             {
@@ -497,6 +490,26 @@
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
+
+                var auto_refresh = setInterval(
+                    function() 
+                    {
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "../badges_inf.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#badges').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 1000);
             });
 
             $(window).scroll(function ()

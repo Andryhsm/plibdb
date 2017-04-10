@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" class="no-js">
     <head>
@@ -20,7 +23,7 @@
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
         
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
+        <!--<script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
         <script type="text/javascript">
             /* <![CDATA[ */
@@ -28,7 +31,7 @@
             /* ]]> */
         </script>
 
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
+        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>-->
        
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -83,8 +86,9 @@
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -106,8 +110,9 @@
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -164,6 +169,7 @@
                                                     <label for="sujet" class="col-sm-3 control-label">Sujet:</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" placeholder="sujet" class="form-control" name="sujet" id="sujet">
+                                                        <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
                                                     </div>
                                                 </div>
                                                 <br>
@@ -233,7 +239,6 @@
             var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
             /* ]]> */
                     </script>
-                    <script type="text/javascript" src="./others/main.js.téléchargement"></script>
                         <script type="text/javascript">
                           $(document).ready( function () 
                           {
@@ -251,6 +256,26 @@
                               else
                                   $('#returnOnTop').fadeIn();
                           });
+                            var auto_refresh = setInterval(
+                                function() 
+                                {
+                                    var status = "lu";
+                                    var email = $('#emailP').val();
+
+                                    $.ajax({
+                                        url: "badges.php",
+                                        type: "POST",
+                                        data: "email="+email,
+                                        success: function(server_response) 
+                                        {  
+                                            $('#badges').html(server_response);
+                                        },
+                                        error: function(server_response) 
+                                        {  
+                                          alert('Erreur :' + server_response);
+                                        }
+                                    });
+                                }, 1000);
                         </script>
 
                         <script type="text/javascript">

@@ -132,8 +132,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <div class="wrapper ">
             <div class="top-wrap">
                 <header class="header-style-1 header-wrap  logo-left">
-
-
                     <div class="main-header " style="display: block;">
                         <div class="container">
                             <div class="logo-box alchem_header_style alchem_default_logo">
@@ -147,8 +145,9 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -170,8 +169,9 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main1" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -205,6 +205,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
                     <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                    <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
                     <div id="type-selector" class="controls">  
                         <label>Ici pour chercher un lieu</label>
 
@@ -364,6 +365,26 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             jQuery(document).ready(function ($) {
+                var auto_refresh = setInterval(
+                    function() 
+                    {
+                        var status = "lu";
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "badges.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#badges').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 1000);
                 $.ajax({
                     url: 'lib-php/infirmier_json.php',
                     type: 'GET',

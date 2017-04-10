@@ -1,7 +1,7 @@
 <?php
-session_start();
-if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
-    header("Location: ../login.html");
+    session_start();
+    if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
+        header("Location: ../login.html");
 }
 
 include_once "cnx.php";
@@ -33,17 +33,6 @@ $data = $req->fetch();
         <link rel="stylesheet" id="parent-style-css" href="../others/style.css" type="text/css" media="all">
 
         <link href="../bootstrap/css/paper.css" rel="stylesheet">
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
 
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -107,8 +96,9 @@ $data = $req->fetch();
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -130,8 +120,9 @@ $data = $req->fetch();
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main1" class="main-nav">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../carte.php"><span class="menu-item-label">Carte</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../notification.php"><span class="menu-item-label" id="badges">Notification</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact1.html"><span class="menu-item-label">Contact</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="../contact1.php"><span class="menu-item-label">Contact</span></a></li>
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
                                 </ul>                    
                             </nav>
@@ -621,12 +612,6 @@ $data = $req->fetch();
 
         <script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript">
-
-        </script>
-        <script type="text/javascript" src="../others/main.js.téléchargement">
-        </script>
         <script type="text/javascript">
             function change()
             {
@@ -733,16 +718,36 @@ $data = $req->fetch();
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
-            });
 
-            $(window).scroll(function ()
-            {
-                if ($(window).scrollTop() > 400)
-                    $('#returnOnTop').fadeIn();
-                else
-                    $('#returnOnTop').fadeOut();
-            });
+                var auto_refresh = setInterval(
+                    function() 
+                    {
+                        var status = "lu";
+                        var email = $('#emailP').val();
 
+                        $.ajax({
+                            url: "../badges.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#badges').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 1000);
+                });
+
+                $(window).scroll(function ()
+                {
+                    if ($(window).scrollTop() > 400)
+                        $('#returnOnTop').fadeIn();
+                    else
+                        $('#returnOnTop').fadeOut();
+                });
         </script>
     </body>
 </html>
