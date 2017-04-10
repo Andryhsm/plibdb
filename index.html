@@ -169,8 +169,21 @@
                 color: #fff;
                 text-decoration: none;
             }
-            .modal{
+            .modal
+            {
                 margin-top: 5rem;
+            }
+
+            .alert 
+            {
+                position: absolute;
+                top: 35%;
+                left: 5%;
+                z-index: 0;
+                background-color: rgba(84, 46, 90, 0.66);
+                border-radius: 10px;
+                border-color: rgb(84, 46, 90);
+                font-size: 1.4em;
             }
 
         </style>
@@ -220,41 +233,32 @@
                 <section class="section magee-section alchem-home-section-0 alchem-home-style-0 " id="section-1">
                     <div class="multi-carousel home-banner-slider">
                         <div class="multi-carousel-inner">
-                            <div id="carousel-banner-section" class="owl-carousel owl-theme owl-loaded owl-drag">
+                            <div id="carousel-banner-section" class="owl-carousel owl-theme owl-loaded owl-drag" align = "left">
 
 
-
+                        
                                 <div id="mycarousel" class="carousel slide" data-ride="carousel">
                                       
                                       <ol class="carousel-indicators">
                                         <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
                                         <li data-target="#mycarousel" data-slide-to="1"></li>
                                         <li data-target="#mycarousel" data-slide-to="2"></li>
-                                        <li data-target="#mycarousel" data-slide-to="3"></li>
-                                        <li data-target="#mycarousel" data-slide-to="4"></li>
                                       </ol>
 
                                       
                                     <div class="carousel-inner" role="listbox">
                                         <div class="item">
-                                            <img src="img/sliderimg_001.png" data-color="lightblue" alt="First Image">
+                                            <img src="img/sliderimg_001.png" data-color="lightblue">
                                         </div>
 
                                         <div class="item">
-                                            <img src="img/sliderimg_002.png" data-color="lightblue" alt="First Image">
+                                            <img src="img/sliderimg_002.png" data-color="lightblue">
                                         </div>
 
                                         <div class="item">
-                                            <img src="img/sliderimg_003.png" data-color="lightblue" alt="First Image">
+                                            <img src="img/sliderimg_003.png" data-color="lightblue">
                                         </div>
 
-                                        <div class="item">
-                                            <img src="img/sliderimg_002.png" data-color="lightblue" alt="First Image">
-                                        </div>
-
-                                        <div class="item">
-                                            <img src="img/sliderimg_001.png" data-color="lightblue" alt="First Image">
-                                        </div>
                                     </div>
 
                                       
@@ -269,8 +273,6 @@
                                     </a>
                                 </div>
 
-
-
                                 <div id = "div1" class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s">
                                     <div id = "div2">
                                         OU.LIB
@@ -281,28 +283,46 @@
                                 </div>
                                 <div id = "div4" class="wow fadeInUp animated" data-wow-delay=".9s" align = "center">
                                     <div id = "div5">
-                                        <table id = "table_carousel">
-                                            <td id = "td_bouton" class="cherche-form form-inline wow fadeInUp animated" data-wow-delay=".50s">
-                                                <a href="./patient-inscription.html" style="margin-left: 35%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis patient</a>
-                                            </td>
-                                            <td id = "td_bouton" class="cherche-form form-inline wow fadeInUp animated" data-wow-delay=".50s">
-                                                <a href="./infirmiere-inscription.html" style="margin-left: 80%;" class=" magee-btn-normal btn-md btn-line btn-light">Je suis infirmièr(e)</a>
-                                            </td>
-                                        </table>
+                                        <button class="btn btn-primary btn-responsive" id="inscription" data-toggle="modal" data-target="#myModal">S'inscrire&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-edit" ></span></button>
                                     </div>
                                 </div>
 
 
-                                <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                                <div class="modal" id="myModal">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" style="text-align: center;">Qui vous êtes ?</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="form-group">
+                                                  <div class="col-lg-11 col-lg-offset-1">
+                                                    <a class="btn btn-default btn-lg" id="patient" href="patient-inscription.html">Un(e) patient(e)&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span></a>&nbsp;&nbsp;
+                                                    <a class="btn btn-primary btn-lg" id="infirmiere" href="infirmiere-inscription.html">Un(e) Infirmier(ère)&nbsp; <span class="glyphicon glyphicon-plus" ></span></a>
+                                                  </div>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
 
-                                <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js'>
-                                </script>
+
+                        
+
+
+
+
+                                
+
+
+                                <script src='js/jquery.min.js'></script>
+
+                                <script src='./bootstrap/js/bootstrap.min.js'></script>
 
                                 <script src="js/slider_js.js"></script>
-
-
-
-        
 
                             </div>
                         </div>
