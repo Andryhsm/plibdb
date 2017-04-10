@@ -236,12 +236,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
-<<<<<<< HEAD
-                    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                     <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
-=======
                     <input id="pac-input" class="controls" type="text" placeholder="Entrer adresse, lieu, Ville">
->>>>>>> ceda91f912cb8d86fbdf8adcb9d267e02e0ac590
                     <div id="type-selector" class="controls">  
                         <label>Ici pour chercher un lieu</label>
 
