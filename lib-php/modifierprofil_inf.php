@@ -33,18 +33,6 @@ $data = $req->fetch();
         <link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
         <link href="../bootstrap/css/paper.css" rel="stylesheet">
 
-        <script type="text/javascript" src="../others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-
-
-
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
         <meta property="og:title" content="Alchem">
@@ -122,8 +110,6 @@ $data = $req->fetch();
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-
-
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                   <div class="navbar-header">
@@ -140,7 +126,7 @@ $data = $req->fetch();
           
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="../liste.php">Liste</a></li>
+                      <li><a href="../liste.php"><span id="badges">Liste</span></a></li>
                       <li><a href="renouvellement.php">Commander matériel</a></li>
                       <li><a href="modifierprofil_inf.php">Modifier mon profil</a></li>
                       <li><a href="../contact2.html">Contact</a></li>
@@ -150,8 +136,6 @@ $data = $req->fetch();
                 </div>
             </nav>
             <div class="clear"></div>
-            
-
 
             <div id="alchem-home-sections">
 
@@ -459,6 +443,7 @@ $data = $req->fetch();
                     </div>
                 </section>
 
+                <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
             </div>
 
             <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror"></button>
@@ -593,7 +578,27 @@ $data = $req->fetch();
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
-            });
+
+                var auto_refresh = setInterval(
+                    function() 
+                    {
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "../badges_inf.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#badges').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 1000);
+                });
 
             $(window).scroll(function ()
             {

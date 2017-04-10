@@ -1,3 +1,15 @@
+<?php
+session_start();
+if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
+    header("Location: ./login.html");
+}
+
+include_once "./lib-php/cnx.php";
+
+$req = $bdd->query("SELECT * FROM oulib_infirmiere WHERE emailI = '" . $_SESSION['email'] . "'");
+$data = $req->fetch();
+?>
+
 <!DOCTYPE html>
 <html lang="fr-FR" class="no-js">
     <head>
@@ -19,8 +31,6 @@
         <link rel="stylesheet" id="wds_font-awesome-css" href="./others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
-        <link href="bootstrap/css/paper.css" rel="stylesheet">
-
         
         <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
@@ -58,37 +68,6 @@
               padding: 0;
             }
 
-            #alchem-home-sections
-            {
-                padding-top: 50px;
-            }
-
-            .logo
-            {
-                position: absolute;
-                width: 10%;
-                z-index: 9;
-                left: 5%;
-            }
-
-            li>a:hover
-            {
-                font-size: 1.4em;
-                color:  #fff;
-                text-decoration: none;
-            }
-
-            li>a
-            {
-                background-color: transparent;
-                font-size: 1.4em;
-                color: #fff;
-                text-decoration: none;
-            }
-            .modal{
-                margin-top: 5rem;
-            }
-
             #returnOnTop
             {
               display: none;
@@ -98,7 +77,7 @@
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-  <div class="top-wrap">
+            <div class="top-wrap">
                 <header class="header-style-1 header-wrap  logo-left">
 
 
@@ -115,7 +94,7 @@
                             </button>
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.php"><span class="menu-item-label">Contact</span></a></li>
@@ -139,7 +118,7 @@
                             </button>
                             <nav class="site-nav" role="navigation" style="">
                                 <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label">Liste</span></a></li>
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./liste.php"><span class="menu-item-label" id="badges">Liste</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.php"><span class="menu-item-label">Contact</span></a></li>
@@ -149,34 +128,8 @@
                         </div>
                     </div>
 
-
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                      <div class="logo">
-                          <a href="#"><img src="img/logo.png"></a>
-                      </div>
-                  </div>
-          
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="liste.php">Liste</a></li>
-                      <li><a href="./lib-php/renouvellement.php">Commander matériel</a></li>
-                      <li><a href="./lib-php/modifierprofil_inf.php">Modifier mon profil</a></li>
-                      <li><a href="contact2.html">Contact</a></li>
-                      <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-            <div class="clear"></div>
-            
+                    <div class="clear"></div>
+                </header>  </div>
             <div id="alchem-home-sections">
 
                 <section class="section magee-section alchem-home-section-1 alchem-home-style-0" id="section-2">
@@ -244,6 +197,7 @@
                                         </div>
                                     </div>
 
+                <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
 
                                 </div>
                             </div>
@@ -303,6 +257,26 @@
                                 //e.preventDefault();
                                 $('html,body').animate({scrollTop: 0}, 'slow');
                             });
+
+				                var auto_refresh = setInterval(
+				                    function() 
+				                    {
+				                        var email = $('#emailP').val();
+
+				                        $.ajax({
+				                            url: "badges_inf.php",
+				                            type: "POST",
+				                            data: "email="+email,
+				                            success: function(server_response) 
+				                            {  
+				                                $('#badges').html(server_response);
+				                            },
+				                            error: function(server_response) 
+				                            {  
+				                              alert('Erreur :' + server_response);
+				                            }
+				                        });
+				                    }, 1000);
                           });
 
                           $(window).scroll(function() 

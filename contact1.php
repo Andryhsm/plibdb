@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" class="no-js">
     <head>
@@ -21,7 +24,7 @@
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
         
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
+        <!--<script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
         <script type="text/javascript">
             /* <![CDATA[ */
@@ -29,7 +32,7 @@
             /* ]]> */
         </script>
 
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
+        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>-->
        
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -98,7 +101,6 @@
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
 
-
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                   <div class="navbar-header">
@@ -116,6 +118,7 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="./carte.php">Carte</a></li>
+                      <li><a href="./notification.php"><span id="badges">Notification</span></a></li>
                       <li><a href="./lib-php/modifierprofil.php">Modifier mon profil</a></li>
                       <li><a href="./contact1.html">Contact</a></li>
                       <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
@@ -174,6 +177,7 @@
                                                     <label for="sujet" class="col-sm-3 control-label">Sujet:</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" placeholder="sujet" class="form-control" name="sujet" id="sujet">
+                                                        <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
                                                     </div>
                                                 </div>
                                                 <br>
@@ -243,7 +247,6 @@
             var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
             /* ]]> */
                     </script>
-                    <script type="text/javascript" src="./others/main.js.téléchargement"></script>
                         <script type="text/javascript">
                           $(document).ready( function () 
                           {
@@ -261,6 +264,26 @@
                               else
                                   $('#returnOnTop').fadeIn();
                           });
+                            var auto_refresh = setInterval(
+                                function() 
+                                {
+                                    var status = "lu";
+                                    var email = $('#emailP').val();
+
+                                    $.ajax({
+                                        url: "badges.php",
+                                        type: "POST",
+                                        data: "email="+email,
+                                        success: function(server_response) 
+                                        {  
+                                            $('#badges').html(server_response);
+                                        },
+                                        error: function(server_response) 
+                                        {  
+                                          alert('Erreur :' + server_response);
+                                        }
+                                    });
+                                }, 1000);
                         </script>
 
                         <script type="text/javascript">

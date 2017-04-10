@@ -11,7 +11,6 @@ include_once "./lib-php/cnx.php";
 <html lang="fr-FR" class="no-js">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <META http-equiv="REFRESH" content="20">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -28,17 +27,6 @@ include_once "./lib-php/cnx.php";
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
-
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-
 
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -122,7 +110,6 @@ include_once "./lib-php/cnx.php";
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                   <div class="navbar-header">
@@ -149,53 +136,20 @@ include_once "./lib-php/cnx.php";
                 </div>
             </nav>
             <div class="clear"></div>
-
-
-            
+ 
             <div id="alchem-home-sections">
 
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
                     <div class="section-content">
                         <div class="container alchem_section_4_model">
+                            <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
 
                             <div class="liste">
-                                <?php
-                                $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
-                                $b = FALSE;
-                                while ($data = $req->fetch()) {
-                                    ?>
-                                    <table class="table table-hover">
-                                        <tbody id="content">
-                                            <tr class="<?php $b = TRUE;
-                                echo($data['id']); ?>">
-                                                <td width='15%'>
-                                                    <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                                </td>
-                                                <td width='45%'>
-                                                    <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                    <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                    <b>Heure de soin:</b> <?php echo($data['date']); ?> <br>
-                                                    <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                                </td>
-                                                <td width='40%'>
-                                                    <br><br>
-    <?php echo($data['commentaire']); ?>
-                                                    <br><br><br>
-                                                    <div class="pull-right">
-                                                        <a class="btn btn-success accepter">Accepter</a>&nbsp;&nbsp
-                                                        <a class="btn btn-danger refuser">Réfuser</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <?php
-                                } if ($b == FALSE) {
-                                    echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
-                                }
-                                ?>
+                                <table class='table table-hover'>
+                                    <tbody id='content'>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -235,19 +189,12 @@ include_once "./lib-php/cnx.php";
             </footer>
         </div>  
         <script type="text/javascript" src="./js/jquery.js"></script>
-        <<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript" src="./others/main.js.téléchargement"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            $('.table').on('click', '.accepter', function (e) {
-                e.preventDefault();
-
-                var a = $(this);
-                var id = a.parents('tr').attr('class');
-
+            function accepter(id)
+            {
                 var status = "accepter";
-                var dataString = "id=" + id + "&status=" + status;
-
+                var dataString = "id="+id+"&status="+status;
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     url: 'lib-php/edit.php', // the url where we want to POST
@@ -275,16 +222,12 @@ include_once "./lib-php/cnx.php";
                         alert(server_response);
                     }
                 });
-            });
-            $('.table').on('click', '.refuser', function (e) {
-                e.preventDefault();
+            };
 
-                var a = $(this);
-                var id = a.parents('tr').attr('class');
-
+            function refuser(id)
+            {
                 var status = "refuser";
-                var dataString = "id=" + id + "&status=" + status;
-
+                var dataString = "id="+id+"&status="+status;
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     url: 'lib-php/edit.php', // the url where we want to POST
@@ -312,7 +255,8 @@ include_once "./lib-php/cnx.php";
                         alert(server_response);
                     }
                 });
-            });
+            };
+
             $(document).ready(function ()
             {
                 $('#returnOnTop').hide();
@@ -320,6 +264,25 @@ include_once "./lib-php/cnx.php";
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
+                var refresh_auto = setInterval(
+                    function() 
+                    {
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "notif_inf.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#content').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 2000);
             });
 
             $(window).scroll(function ()
