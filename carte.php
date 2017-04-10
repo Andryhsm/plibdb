@@ -72,8 +72,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             }
 
             #map {
-                margin: 0% 2% 0% 2%;
-                width: 95vw;
+                margin: 0% 0% 0% 0%;
+                width: 100vw;
                 height: 80vh;
                 background: white;
             }
@@ -124,6 +124,17 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
             #chercher{
                 margin: -4% 0% 0% -16%;
+            }
+
+            .main-header {
+                background-color: rgb(77, 144, 254);
+                color: white;
+                width: 100%;
+                border-bottom: 1px solid transparent;
+            }
+
+            footer .footer-info-area {
+                background-color: rgb(77, 144, 254);
             }
         </style><!-- <meta name="vfb" version="2.9.2" /> -->
         <style type="text/css">
@@ -185,27 +196,52 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             <div id="alchem-home-sections">
-                <button class="btn btn-primary hidden btn-lg" id="triggerwarning" data-toggle="modal" data-target="#loginerror">tester</button>
+                 <!-- Un test de modal dialogue -->
+                    <a class="btn btn-primary hidden" data-toggle="modal" id="triggerwarningI" href='#modal-id'>Trigger modal</a>
+                    <div class="modal fade" id="modal-id">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Infirmier libérale</h4>
+                                </div>
+                                <div class="modal-body" >
+                                    <div class="warning" id="infoI"></div>    
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="modal" id="loginerror">
+
+                <!-- Modal -->
+                <a class="btn btn-primary hidden" id="triggerwarning" data-toggle="modal" href='#warning'>Trigger modal</a>
+                <div class="modal fade" id="warning">
                     <div class="modal-dialog">
-                        <div class="modal-content alert alert-dismissible alert-info col-lg-12">
+                        <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="ferme">&times;</button>
-                                <h4 class="modal-title" style="text-align: center;">Information !</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Information</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="warning" id="info"></div>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" id="ferme" class="btn btn-default hidden" data-dismiss="modal"></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
+<<<<<<< HEAD
                     <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                     <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
+=======
+                    <input id="pac-input" class="controls" type="text" placeholder="Entrer adresse, lieu, Ville">
+>>>>>>> ceda91f912cb8d86fbdf8adcb9d267e02e0ac590
                     <div id="type-selector" class="controls">  
                         <label>Ici pour chercher un lieu</label>
 
@@ -406,29 +442,91 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
                                 var p = "<div class='col-lg-12'>";
-                                p += "<center><h4>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
+                                p += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
                                 p += "<div class='col-lg-8'>";
                                 p += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
                                 p += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
                                 p += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
                                 p += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
                                 p += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
+                                p += "<div id='input_date'><p><strong>Heure de soin : </strong>&nbsp;&nbsp;&nbsp;<input id='heure_soin' type='text' placeholder='Heure de soin' /></p>";
+                                p += "<p><strong>Date : </strong><input type='date' id='date_soin' placeholder=\"Date d\'intervention\"/></p></div>";
                                 p += "</div>";
                                 p += "<div class='col-lg-4'>";
                                 p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
                                 p += "</div>";
                                 p += "<div class='col-lg-12'>";
-                                p += "<center><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
+                                p += "<center></br></br><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
                                 p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\"" + infirmier.emailI + "\");' value='Prendre rendez-vous' /></center>";
                                 p += "</div>";
                                 p += "</div>";
+
+
+                                var p2 = "<div class='col-lg-12'>";
+                                p2 += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
+                                p2 += "<div class='col-lg-8'>";
+                                p2 += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
+                                p2 += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
+                                p2 += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
+                                p2 += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
+                                p2 += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
+                                p2 += "</div>";
+                                p2 += "<div class='col-lg-4'>";
+                                p2 += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
+                                p2 += "</div>";
+                                p2 += "<div class='col-lg-12'>";
+                                p2 += "<center><input type='submit' class='btn btn-primary' name='rdv' value='Demande dejà envoyer'/></center>";
+                                p2 += "</div>";
+                                p2 += "</div>";
 
                                 var infoW = new google.maps.InfoWindow({
                                     content: p
                                 });
 
                                 marker.addListener('click', function () {
-                                    infoW.open(map, marker);
+                                    // infoW.open(map, marker);
+                                    $.ajax({
+                                        url: 'lib-php/lib/nb_frequence_soin.php',
+                                        type: 'default GET (Other values: POST)',
+                                        dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                                        data: {param1: 'value1'},
+                                    })
+                                    .done(function() {
+                                        console.log("success");
+                                    })
+                                    .fail(function() {
+                                        console.log("error");
+                                    })
+                                    .always(function() {
+                                        console.log("complete");
+                                    });
+                                    
+
+                                    <?php echo "var emailP = \"".$_SESSION["email"]."\";"; ?>
+                                    $.ajax({
+                                        url: 'lib-php/lib/savoir_demande.php?emailP='+emailP,
+                                        type: 'GET',
+                                        success: function(data){
+                                            if(data === "inexiste"){
+                                           //     alert("Demande est inexiste");
+                                               $('#infoI').html(p);
+                                               $('#triggerwarningI').trigger('click');
+                                           
+                                            }else if(data === "existe"){
+                                               $('#infoI').html(p2);
+                                               $('#triggerwarningI').trigger('click');
+                                            
+                                            //alert("La demande est existe ! ");
+                                            }else{
+                                                alert("Une erreur php dans savoir_demande.php");
+                                            }
+                                        },
+                                        error: function(data){
+                                            alert("Erreur de requete ajax sur savoir_demande.php");
+                                        }
+                                        
+                                    });
+                                    
                                 });
 
                             }
@@ -449,21 +547,22 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     type: 'GET',
                     success: function (data) {
                         if (data === "reussi") {
-
-                            $('#info').html('<p> Votre demande est vient envoyer . </p>');
+                            $('#info').html('<p> Votre demande est bien envoyer . </p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
                             }, 40000);
 
-
+                            //$("#closeMI").trigger('click');
                         } else if (data === "existe") {
-                            
-                            $('#info').html('<p> Vous avez deja envoyer une demande </p>');
+                            var nom = $('#nomInfirmier').html();
+                           
+                            $('#info').html('<p> Votre demande à <strong>'+nom+'</strong> est dejà envoyer !</p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
                             }, 40000);
+                            //$("#closeMI").trigger('click');
                         } else {
                         }
                     },

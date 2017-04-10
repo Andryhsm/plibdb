@@ -29,12 +29,14 @@
 			$frequenceSoin2 = $_SESSION["frequence-soin2"];
 			$frequenceSoin3 = $_SESSION["frequence-soin3"];
 			$frequenceSoin4 = $_SESSION["frequence-soin4"];
-			$heure1 = $_SESSION["heure1"];
+			$photo = $_SESSION["photo"];
+	
+	/*		$heure1 = $_SESSION["heure1"];
 			$heure2 = $_SESSION["heure2"];
 			$heure3 = $_SESSION["heure3"];
 			$heure4 = $_SESSION["heure4"];
 			$photo = $_SESSION["photo"];
-
+*/
 			$status = "attente";
 
 			if($typeSoin2 != null)
@@ -51,7 +53,7 @@
 				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3;
 			if($frequenceSoin4 != null)
 				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3 ." - ". $frequenceSoin4;
-
+/*
 
 			if($heure2 != null)
 				$date = $heure1. " - ". $heure2;
@@ -59,10 +61,13 @@
 				$date = $heure1. " - ". $heure2 . " - ". $heure3;
 			if($heure4 != null)
 				$date = $heure1. " - ". $heure2 . " - ". $heure3 ." - ". $heure4;
+*/
+			$date = "heure";
+			$q = "INSERT INTO `oulib_liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')";
 
+			//echo $q;
 
-
-			$bdd->exec("INSERT INTO `oulib_liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')") or die(print_r($bdd->ErrorInfo()));
+			$bdd->exec($q) or die(print_r($bdd->ErrorInfo()));
 
 		echo "reussi";
 	}else{
