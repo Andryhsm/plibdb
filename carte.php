@@ -123,37 +123,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 font-weight: 300;
             }
 
-            #alchem-home-sections
-            {
-                padding-top: 50px;
-            }
-
-            .logo
-            {
-                position: absolute;
-                width: 10%;
-                z-index: 9;
-                left: 5%;
-            }
-
-            li>a:hover
-            {
-                font-size: 1.1em;
-                color:  #fff;
-                text-decoration: none;
-            }
-
-            li>a
-            {
-                background-color: transparent;
-                font-size: 1.1em;
-                color: #fff;
-                text-decoration: none;
-            }
-            .modal{
-                margin-top: 5rem;
-            }
-
             #chercher{
                 margin: -4% 0% 0% -16%;
             }
@@ -185,10 +154,9 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                background: #f3f8f7;
             }
             #nomInfirmier {
-                font-size: 2.6em;
-                color: #80a6a8;
+                font-size: 2.2em;
+                color: #6b624d;
             }
-
             footer .footer-info-area {
                 background-color: rgb(77, 144, 254);
             }
@@ -197,7 +165,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-<<<<<<< HEAD
             <div class="top-wrap">
                 <header class="header-style-1 header-wrap  logo-left">
                     <div class="main-header " style="display: block;">
@@ -247,35 +214,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 </header>  
             </div>     
 
-=======
->>>>>>> 16520737ede30ccbc74495cda3c7367a07f4cc2f
 
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                      <div class="logo">
-                          <a href="#"><img src="img/logo.png"></a>
-                      </div>
-                  </div>
-          
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="./carte.php">Carte</a></li>
-                      <li><a href="./notification.php"><span id="badges">Notification</span></a></li>
-                      <li><a href="./lib-php/modifierprofil.php">Modifier mon profil</a></li>
-                      <li><a href="./contact1.php">Contact</a></li>
-                      <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-            <div class="clear"></div>    
 
             <div id="alchem-home-sections">
                 <!-- Un test de modal dialogue -->
@@ -318,7 +257,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5" style="padding:0%;">
-                    <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
                     <input id="pac-input" class="controls" type="text" placeholder="Entrer adresse, lieu, Ville">
                     <div id="type-selector" class="controls">  
                         <label>Ici pour chercher un lieu</label>
@@ -374,7 +312,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             var tab_marqueur = [];
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -33.8688, lng: 151.2195},
+                    center: {lat: 48.862226, lng: 2.340173},
                     zoom: 13
                 });
 
@@ -391,6 +329,13 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             map: map,
                             position: pos
                         });
+
+                        var infoW = new google.maps.InfoWindow({
+                            content: "Vous êtes içi ! "
+                        });
+
+                        infoW.open(map, marker);
+
                         marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
                         map.setCenter(pos);
 
@@ -485,26 +430,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             jQuery(document).ready(function ($) {
-                var auto_refresh = setInterval(
-                    function() 
-                    {
-                        var status = "lu";
-                        var email = $('#emailP').val();
-
-                        $.ajax({
-                            url: "badges.php",
-                            type: "POST",
-                            data: "email="+email,
-                            success: function(server_response) 
-                            {  
-                                $('#badges').html(server_response);
-                            },
-                            error: function(server_response) 
-                            {  
-                              alert('Erreur :' + server_response);
-                            }
-                        });
-                    }, 1000);
                 $.ajax({
                     url: 'lib-php/infirmier_json.php',
                     type: 'GET',
@@ -607,9 +532,11 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 });
 
                 var p = "<div class='col-lg-12 info'>";
-                p += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
-                p += "<div id='img-infirmier' class='col-lg-4'>";
+                p += "<div class='row'>";
+                p += "<div class='col-xs-6 col-lg-6 col-sm-6'><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center></div>";
+                p += "<div id='img-infirmier' class='col-xs-3 col-lg-3 col-sm-3'>";
                 p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
+                p += "</div>";
                 p += "</div>";
                 p += "<div class='col-lg-8'>";
                 p += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
@@ -636,9 +563,11 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
                 var p2 = "<div class='col-lg-12 info'>";
-                p2 += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
-                p2 += "<div id='img-infirmier' class='col-lg-4'>";
+                p2 += "<div class='row'>";
+                p2 += "<div class='col-xs-6 col-lg-6 col-sm-6'><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center></div>";
+                p2 += "<div id='img-infirmier' class='col-xs-3 col-lg-3 col-sm-3'>";
                 p2 += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
+                p2 += "</div>";
                 p2 += "</div>";
                 p2 += "<div class='col-lg-8'>";
                 p2 += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
@@ -671,11 +600,11 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                         success: function (data) {
                             if (data === "inexiste") {
                                 //     alert("Demande est inexiste");
-                                $('.modal-body').html(p);
+                                $('.modal-body').html(encode_utf8(p));
                                 $('#triggerwarningI').trigger('click');
 
                             } else if (data === "existe") {
-                                $('.modal-body').html(p2);
+                                $('.modal-body').html(encode_utf8(p2));
                                 $('#triggerwarningI').trigger('click');
 
                                 //alert("La demande est existe ! ");
@@ -689,6 +618,14 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
                     });
                 });
+            }
+
+            function encode_utf8(s) {
+                 return unescape(encodeURIComponent(s));
+            }
+
+            function decode_utf8(s) {
+                 return decodeURIComponent(escape(s));
             }
             
             $("#test").click(function(event) {

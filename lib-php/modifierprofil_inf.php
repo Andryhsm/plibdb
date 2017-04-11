@@ -94,7 +94,7 @@ $data = $req->fetch();
                 background-color: transparent;
                 font-size: 1.1em;
                 color: #fff;
-                text-decoration: none;
+                    text-decoration: none;
             }
             .modal{
                 margin-top: 5rem;
@@ -157,14 +157,14 @@ $data = $req->fetch();
                                                         <h4>Vos informations personnels :</h4><br>
                                                         <label for="nom" class="col-sm-2 control-label">Nom:</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" placeholder="nom" required="" class="form-control" name="nomI" id="nomI" value="<?php echo($data['nomI']); ?>">
+                                                            <input type="text" placeholder="nom" required="" class="form-control" name="nomI" id="nomI" value="<?php echo(utf8_encode($data['nomI'])); ?>">
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group hidden">
                                                         <div class="col-sm-9">
-                                                            <input type="text" placeholder="nom" required="" class="form-control" name="idI" id="idI" value="<?php echo($data['id']); ?>">
+                                                            <input type="text" placeholder="nom" required="" class="form-control" name="idI" id="idI" value="<?php echo(utf8_encode($data['id'])); ?>">
                                                         </div>
                                                     </div>
 
@@ -172,47 +172,47 @@ $data = $req->fetch();
                                                     <div class="form-group">
                                                         <label for="prenom" class="col-sm-2 control-label">Prenom:</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" placeholder="prenom" required="" class="form-control" name="prenomI" id="prenomI" value="<?php echo($data['prenomI']); ?>">
+                                                            <input type="text" placeholder="prenom" required="" class="form-control" name="prenomI" id="prenomI" value="<?php echo(utf8_encode($data['prenomI'])); ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="email" class="col-sm-2 control-label">Email:</label>
                                                         <div class="col-sm-9">
-                                                            <input type="email" placeholder="email" class="form-control" required="" name="emailI" id="emailI" value="<?php echo($data['emailI']); ?>">
+                                                            <input type="email" placeholder="email" class="form-control" required="" name="emailI" id="emailI" value="<?php echo(utf8_encode($data['emailI'])); ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="mdp" class="col-sm-2 control-label">Mot de passe:</label>
                                                         <div class="col-sm-9">
-                                                            <input type="password" required="" placeholder="mot de passe" class="form-control" name="mdpI" id="mdpI" value="<?php echo($data['mdpI']); ?>">
+                                                            <input type="password" required="" placeholder="mot de passe" class="form-control" name="mdpI" id="mdpI" value="<?php echo(utf8_encode($data['mdpI'])); ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="conf-mdp" class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-9">
-                                                            <input type="password" required="" placeholder="confirmation du mot de passe" class="form-control" name="conf-mdpI" id="conf-mdpI" value="<?php echo($data['mdpI']); ?>">
+                                                            <input type="password" required="" placeholder="confirmation du mot de passe" class="form-control" name="conf-mdpI" id="conf-mdpI" value="<?php echo(utf8_encode($data['mdpI'])); ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="tel" class="col-sm-2 control-label">Téléphone:</label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" placeholder="téléphone" required="" class="form-control" name="telI" id="telI" value="<?php echo($data['telI']); ?>">
+                                                            <input type="number" placeholder="téléphone" required="" class="form-control" name="telI" id="telI" value="<?php echo(utf8_encode($data['telI'])); ?>">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="adresse" class="col-sm-2 control-label">Adresse:</label>
                                                         <div class="col-sm-3">
-                                                            <input type="text" required="" placeholder="numéro et nom de rue" class="form-control" name="rueI" id="rueI" value="<?php echo($data['rueI']); ?>">
+                                                            <input type="text" required="" placeholder="numéro et nom de rue" class="form-control" name="rueI" id="rueI" value="<?php echo(utf8_encode($data['rueI'])); ?>">
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <input type="number" required="" placeholder="code postal" class="form-control" name="code-postalI" id="code-postalI" value="<?php echo($data['code-postalI']); ?>">
+                                                            <input type="number" required="" placeholder="code postal" class="form-control" name="code-postalI" id="code-postalI" value="<?php echo(utf8_encode($data['code-postalI'])); ?>">
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <input type="text" required="" placeholder="ville" class="form-control" name="villeI" id="villeI" value="<?php echo($data['villeI']); ?>">
+                                                            <input type="text" required="" placeholder="ville" class="form-control" name="villeI" id="villeI" value="<?php echo(utf8_encode($data['villeI'])); ?>">
                                                         </div>
                                                     </div><br>
 
@@ -222,10 +222,10 @@ $data = $req->fetch();
                                                         </div>
                                                         <div class="panel-body">
                                                             <div class="">
-                                                                <p><b><?php echo($data['type-soinI1']); ?></b></p>
-                                                                <p><b><?php echo($data['type-soinI2']); ?></b></p>
-                                                                <p><b><?php echo($data['type-soinI3']); ?></b></p>
-                                                                <p><b><?php echo($data['type-soinI4']); ?></b></p>
+                                                                <p><b><?php echo(utf8_encode($data['type-soinI1'])); ?></b></p>
+                                                                <p><b><?php echo(utf8_encode($data['type-soinI2'])); ?></b></p>
+                                                                <p><b><?php echo(utf8_encode($data['type-soinI3'])); ?></b></p>
+                                                                <p><b><?php echo(utf8_encode($data['type-soinI4'])); ?></b></p>
                                                                 <p>Votre lieu d'intervention : <b><?php echo($data['lieu-intervention']); ?></b></p>
                                                             </div>
                                                             <div class="btn btn-warning" id="changesoins" onClick="changeSoins();"> Changer mes informations de soins</div>
