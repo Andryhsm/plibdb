@@ -3,18 +3,28 @@
 		require_once 'cnx.php';
 		
 		$d = array('solofo' => array('koto' => "liva" ));
-		header("Content-Type: text/javascript");
+		
+		header("Content-Type: text/html; charset:utf-8");
 
 		$donnees = array();
+		$donnee = array();
+		$datas = array();
+		
 		$reponse = $bdd->query("SELECT * FROM oulib_infirmiere");
 	
 		while($data = $reponse->fetch(PDO::FETCH_OBJ))
 		{
-			$donnees[] = json_encode($data);
-		}
 
+			foreach ($data as $key => $value) {
+				$donnee[$key] = utf8_encode($value);
+			}
+			$datas[] = json_encode($donnee);
 
-		$json = json_encode($donnees);
+		}	
+		
+
+		$json = json_encode($datas);
+
 		$json = str_replace("code-postalI", "code_postalI", $json);
 		$json = str_replace("type-soinI1", "type_soinI1", $json);
 		$json = str_replace("type-soinI2", "type_soinI2", $json);

@@ -4,19 +4,25 @@
 
 	session_start();
 
+
+	$emailI = urldecode($_GET["emailI"]);
+	$date_soin1 = urldecode($_GET["date_soin"]);
+	$heure_soin = urldecode($_GET["heure_soin"]);
+	$commentaire = urldecode($_GET["commentaire"]);
+
+	$date = explode("-", $date_soin1);
+
+	$date_soin = $date[2]."-".$date[1]."-". $date[0]."";
+	
 	$emailP = $_SESSION["email"];
 
-	$query = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailP=\"".$emailP."\"");
+	$query = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailP=\"".$emailP."\" AND emailI=\"".$emailI."\"");
 
 	if($query->rowCount() == 0){
 
-			$emailI = $_GET["emailI"];
-
-			$commentaire = urldecode($_GET["commentaire"]);
-
 			
 			$nomP = $_SESSION["nomP"];
-			$prenomP = $_SESSION["prenomP"];
+			$prenomP = $_SESSION["prenomP"];	
 			$telP = $_SESSION["telP"];
 			$rueP = $_SESSION["rueP"];
 			$codePostalP = $_SESSION["code-postalP"];
@@ -31,12 +37,7 @@
 			$frequenceSoin4 = $_SESSION["frequence-soin4"];
 			$photo = $_SESSION["photo"];
 	
-	/*		$heure1 = $_SESSION["heure1"];
-			$heure2 = $_SESSION["heure2"];
-			$heure3 = $_SESSION["heure3"];
-			$heure4 = $_SESSION["heure4"];
-			$photo = $_SESSION["photo"];
-*/
+
 			$status = "attente";
 
 			if($typeSoin2 != null)
@@ -53,17 +54,9 @@
 				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3;
 			if($frequenceSoin4 != null)
 				$frequenceSoinP = $frequenceSoin1. " - ". $frequenceSoin2 . " - ". $frequenceSoin3 ." - ". $frequenceSoin4;
-/*
 
-			if($heure2 != null)
-				$date = $heure1. " - ". $heure2;
-			if($heure3 != null)
-				$date = $heure1. " - ". $heure2 . " - ". $heure3;
-			if($heure4 != null)
-				$date = $heure1. " - ". $heure2 . " - ". $heure3 ." - ". $heure4;
-*/
 			$date = "heure";
-			$q = "INSERT INTO `oulib_liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `date`, `frequenceSoin`, `status`, `emailP`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$date', '$frequenceSoinP', '$status', '$emailP')";
+			$q = "INSERT INTO `oulib_liste_demande` (`photo`, `emailI`, `nomP`, `prenomP`, `telP`, `typeSoinP`, `commentaire`, `frequenceSoin`, `status`, `emailP`, `date_soin`, `heure_soin`) VALUES('$photo', '$emailI', '$nomP', '$prenomP', '$telP', '$typeSoinP', '$commentaire', '$frequenceSoinP', '$status', '$emailP', '$date_soin', '$heure_soin')";
 
 			//echo $q;
 

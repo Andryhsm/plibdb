@@ -28,6 +28,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootsrap.min.css">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.miin.css">
         <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
+        <link rel="stylesheet" type="text/css" href="js/datepicker/css/datepicker.css">
 
         <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
@@ -133,6 +134,30 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 border-bottom: 1px solid transparent;
             }
 
+            #img-infirmier {
+                width: 60%;
+                margin-left: 60%;
+
+            }
+            .modal-header {
+                text-align: center;
+                padding: 15px;
+                border-bottom: 1px solid transparent;
+                background: #2196f3;
+                border: 1px solid white;
+                color: white;
+            }
+            .modal-title {
+                color: white;
+            }
+            .info {
+               background: #f3f8f7;
+            }
+            #nomInfirmier {
+                font-size: 2.6em;
+                color: #80a6a8;
+            }
+
             footer .footer-info-area {
                 background-color: rgb(77, 144, 254);
             }
@@ -143,13 +168,10 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <div class="wrapper ">
             <div class="top-wrap">
                 <header class="header-style-1 header-wrap  logo-left">
-
-
                     <div class="main-header " style="display: block;">
                         <div class="container">
                             <div class="logo-box alchem_header_style alchem_default_logo">
                                 <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-
                             </div>
                             <button class="site-nav-toggle">
                                 <span class="sr-only">Toggle navigation</span>
@@ -196,23 +218,23 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             <div id="alchem-home-sections">
-                 <!-- Un test de modal dialogue -->
-                    <a class="btn btn-primary hidden" data-toggle="modal" id="triggerwarningI" href='#modal-id'>Trigger modal</a>
-                    <div class="modal fade" id="modal-id">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title">Infirmier libérale</h4>
-                                </div>
-                                <div class="modal-body" >
-                                    <div class="warning" id="infoI"></div>    
-                                </div>
-                                <div class="modal-footer">
-                                </div>
+                <!-- Un test de modal dialogue -->
+                <a class="btn btn-primary hidden" data-toggle="modal" id="triggerwarningI" href='#modal-id'>Trigger modal</a>
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog" style="margin:0%; height: 100vh;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">INFIRMIERE LIBERALE</h4>
+                            </div>
+                            <div class="modal-body" >
+                                <div class="warning" id="infoI"></div>    
+                            </div>
+                            <div class="modal-footer">
                             </div>
                         </div>
                     </div>
+                </div>
 
 
                 <!-- Modal -->
@@ -254,7 +276,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             <footer class="">
-
                 <div class="footer-info-area">
                     <div class="container text-center alchem_footer_social_icon_1">
                         <div class="site-info">
@@ -268,6 +289,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
         <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+        <script type="text/javascript" src="js/datepicker/js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
@@ -278,11 +300,17 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
         <script type="text/javascript" src="./others/main.js.téléchargement"></script>
 
         <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&callback=initMap" async defer></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFYS6_tY3pkUEhb3cSkRUqiifSbTGOFa4&libraries=places"></script>
+
 
 
         <script type="text/javascript">
+
+            $('.dp3').datepicker({
+                    autoclose: true
+            });
+
             var map;
+            var tab_marqueur = [];
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -33.8688, lng: 151.2195},
@@ -401,109 +429,16 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     type: 'GET',
                     success: function (data) {
                         var json = $.parseJSON(data);
-                        //alert(json.length);
                         for (var i = json.length - 1; i >= 0; i--) {
                             var infirmier = $.parseJSON(json[i]);
+
                             if (typeof infirmier.latLng != "undefined") {
                                 latLng = infirmier.latLng.replace('(', '');
                                 latLng = latLng.replace(')', '');
                                 var latLng = latLng.split(',');
-                                //alert(latLng[0]);
                                 var pos = new google.maps.LatLng(latLng[0], latLng[1]);
-                                var marker = new google.maps.Marker({
-                                    map: map,
-                                    position: pos
-                                });
 
-
-                                var p = "<div class='col-lg-12'>";
-                                p += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
-                                p += "<div class='col-lg-8'>";
-                                p += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
-                                p += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
-                                p += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
-                                p += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
-                                p += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
-                                p += "<div id='input_date'><p><strong>Heure de soin : </strong>&nbsp;&nbsp;&nbsp;<input id='heure_soin' type='text' placeholder='Heure de soin' /></p>";
-                                p += "<p><strong>Date : </strong><input type='date' id='date_soin' placeholder=\"Date d\'intervention\"/></p></div>";
-                                p += "</div>";
-                                p += "<div class='col-lg-4'>";
-                                p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
-                                p += "</div>";
-                                p += "<div class='col-lg-12'>";
-                                p += "<center></br></br><textarea class='form-control' placeholder='Ecrivez varotre commentaire ici' name='commentaire' id='commentaire' type='text'></textarea><br>";
-                                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\"" + infirmier.emailI + "\");' value='Prendre rendez-vous' /></center>";
-                                p += "</div>";
-                                p += "</div>";
-
-
-                                var p2 = "<div class='col-lg-12'>";
-                                p2 += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
-                                p2 += "<div class='col-lg-8'>";
-                                p2 += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
-                                p2 += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
-                                p2 += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
-                                p2 += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
-                                p2 += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
-                                p2 += "</div>";
-                                p2 += "<div class='col-lg-4'>";
-                                p2 += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
-                                p2 += "</div>";
-                                p2 += "<div class='col-lg-12'>";
-                                p2 += "<center><input type='submit' class='btn btn-primary' name='rdv' value='Demande dejà envoyer'/></center>";
-                                p2 += "</div>";
-                                p2 += "</div>";
-
-                                var infoW = new google.maps.InfoWindow({
-                                    content: p
-                                });
-
-                                marker.addListener('click', function () {
-                                    // infoW.open(map, marker);
-                                    $.ajax({
-                                        url: 'lib-php/lib/nb_frequence_soin.php',
-                                        type: 'default GET (Other values: POST)',
-                                        dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-                                        data: {param1: 'value1'},
-                                    })
-                                    .done(function() {
-                                        console.log("success");
-                                    })
-                                    .fail(function() {
-                                        console.log("error");
-                                    })
-                                    .always(function() {
-                                        console.log("complete");
-                                    });
-                                    
-
-                                    <?php echo "var emailP = \"".$_SESSION["email"]."\";"; ?>
-                                    $.ajax({
-                                        url: 'lib-php/lib/savoir_demande.php?emailP='+emailP,
-                                        type: 'GET',
-                                        success: function(data){
-                                            if(data === "inexiste"){
-                                           //     alert("Demande est inexiste");
-                                               $('#infoI').html(p);
-                                               $('#triggerwarningI').trigger('click');
-                                           
-                                            }else if(data === "existe"){
-                                               $('#infoI').html(p2);
-                                               $('#triggerwarningI').trigger('click');
-                                            
-                                            //alert("La demande est existe ! ");
-                                            }else{
-                                                alert("Une erreur php dans savoir_demande.php");
-                                            }
-                                        },
-                                        error: function(data){
-                                            alert("Erreur de requete ajax sur savoir_demande.php");
-                                        }
-                                        
-                                    });
-                                    
-                                });
-
+                                afficher_marqueur(map, infirmier, pos);
                             }
                         }
                     },
@@ -516,9 +451,10 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             });
             function rendezVous(emailI) {
                 var commentaire = encodeURIComponent($("#commentaire").val());
-
+                var heure_soin = encodeURIComponent($("#heure_soin").val());
+                var date_soin = encodeURIComponent($("#date_soin").val());
                 $.ajax({
-                    url: 'lib-php/rendez-vous.php?emailI=' + emailI + "&commentaire=" + commentaire,
+                    url: 'lib-php/rendez-vous.php?emailI='+emailI+'&date_soin='+date_soin+'&heure_soin='+heure_soin+'&commentaire='+commentaire,  
                     type: 'GET',
                     success: function (data) {
                         if (data === "reussi") {
@@ -531,14 +467,15 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             //$("#closeMI").trigger('click');
                         } else if (data === "existe") {
                             var nom = $('#nomInfirmier').html();
-                           
-                            $('#info').html('<p> Votre demande à <strong>'+nom+'</strong> est dejà envoyer !</p>');
+
+                            $('#info').html('<p> Votre demande à <strong>' + nom + '</strong> est dejà envoyer !</p>');
                             $('#triggerwarning').trigger('click');
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
                             }, 40000);
                             //$("#closeMI").trigger('click');
                         } else {
+                            alert("Une erreur de requete dans rendez-vous.php");
                         }
                     },
                     error: function () {
@@ -551,7 +488,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 });
             }
 
-//Geocodage des adresses
+            //Geocodage des adresses
+            
             function geocodeAddress(resultsMap, address) {
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode({'address': address}, function (results, status) {
@@ -577,6 +515,104 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     }
                 });
             }
+
+
+            function afficher_marqueur(Smap, infirmier, pos) {
+                var marqueur = new google.maps.Marker({
+                    map: map,
+                    position: pos,
+                    title: infirmier.nomI,
+                    id: infirmier.id
+                });
+
+                var p = "<div class='col-lg-12 info'>";
+                p += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
+                p += "<div id='img-infirmier' class='col-lg-4'>";
+                p += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
+                p += "</div>";
+                p += "<div class='col-lg-8'>";
+                p += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
+                p += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
+                p += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
+                p += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
+                p += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
+                p += "<div id='input_date'>";
+                p += "</div>";
+                p += "<div>";
+                p += "<p><label for='date_soin'>Date de soin : </label>";
+                p += "<input class='form-control col-lg-2' id='date_soin' name='date_soin' type='datep' placeholder='12-12-2012'></input></p>";
+                p += "<p><label for='heure_soin'>Heure de soin : </label>";
+                p += "<div class='input-group'>";
+                p += "  <input class='form-control col-lg-2' id='heure_soin' name='heure_soin' type='time' placeholder='12'></input></p>";
+                p += "  <span class='input-group-addon'>h</span>";
+                p += "</div>";
+                p += "</div>";
+                p += "<div class='col-lg-12'>";
+                p += "<center></br></br><textarea class='form-control' placeholder='Decriver votre demande içi' name='commentaire' id='commentaire' type='text'></textarea><br>";
+                p += "<input type='submit' class='btn btn-primary' name='rdv' onclick='rendezVous(\"" + infirmier.emailI + "\");' value='Prendre rendez-vous' /></center>";
+                p += "</div>";
+                p += "</div>";
+
+
+                var p2 = "<div class='col-lg-12 info'>";
+                p2 += "<center><h4 id='nomInfirmier'>" + infirmier.prenomI + " " + infirmier.nomI + "</h4></center>";
+                p2 += "<div id='img-infirmier' class='col-lg-4'>";
+                p2 += "<img src='./image-person/" + infirmier.photo + "' style='width:60%;'/>";
+                p2 += "</div>";
+                p2 += "<div class='col-lg-8'>";
+                p2 += "<p><strong>Téléphone : </strong>" + infirmier.telI + "</p>";
+                p2 += "<p><strong>Email : </strong>" + infirmier.emailI + "</p>";
+                p2 += "<p><strong>Adresse : </strong>" + infirmier.rueI + " - " + infirmier.code_postalI + " - " + infirmier.villeI + "</p>";
+                p2 += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
+                p2 += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
+                p2 += "</div>";
+                p2 += "<div class='col-lg-12'>";
+                p2 += "<center><input type='submit' class='btn btn-primary' name='rdv' value='Demande dejà envoyer'/></center>";
+                p2 += "</div>";
+                p2 += "</div>";
+
+
+
+                <?php echo "var emailP = \"" . $_SESSION["email"] . "\";"; ?>
+                /*
+                 var infoWindow = new google.maps.InfoWindow({
+                 content: p
+                 });*/
+
+
+
+                marqueur.addListener('click', function () {
+                    // infoWindow.open(Smap, marqueur);
+
+                    $.ajax({
+                        url: 'lib-php/lib/savoir_demande.php?emailP=' + emailP + '&emailI=' + infirmier.emailI,
+                        type: 'GET',
+                        success: function (data) {
+                            if (data === "inexiste") {
+                                //     alert("Demande est inexiste");
+                                $('.modal-body').html(p);
+                                $('#triggerwarningI').trigger('click');
+
+                            } else if (data === "existe") {
+                                $('.modal-body').html(p2);
+                                $('#triggerwarningI').trigger('click');
+
+                                //alert("La demande est existe ! ");
+                            } else {
+                                alert("Une erreur php dans savoir_demande.php");
+                            }
+                        },
+                        error: function (data) {
+                            alert("Erreur de requete ajax sur savoir_demande.php");
+                        }
+
+                    });
+                });
+            }
+            
+            $("#test").click(function(event) {
+
+            });
         </script>
 
     </body>
