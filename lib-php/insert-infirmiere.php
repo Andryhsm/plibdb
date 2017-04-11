@@ -30,13 +30,13 @@ $email = utf8_decode($email);
 $tel = utf8_decode($tel);
 $rue = utf8_decode($rue);
 $code_postal = utf8_decode($code_postal);
-$ville = utf8_decode($ville);
+$ville = mysql_escape_string(utf8_decode($ville));
 $latLng = utf8_decode($latLng);
 $type_soin1 = utf8_decode($type_soin1);
 $type_soin2 = utf8_decode($type_soin2);
 $type_soin3 = utf8_decode($type_soin3);
 $type_soin4 = utf8_decode($type_soin4);
-$lieu_intervention = utf8_decode($lieu_intervention);
+$lieu_intervention = mysql_escape_string(utf8_decode($lieu_intervention));
 
 
 $dossier = '../image-person/';
@@ -46,8 +46,8 @@ $fichier = basename($_FILES['photo']['name']);
 //Verification fichier
 if ($fichier == "") {
     $fichier = "avatar_inf.jpg";
-    $reponse = $bdd->query("SELECT * FROM infirmiere WHERE emailI = '" . $email . "'");
-    $val = $bdd->query("SELECT * FROM patient WHERE emailP = '" . $email . "'");
+    $reponse = $bdd->query("SELECT * FROM oulib_nfirmiere WHERE emailI = '" . $email . "'");
+    $val = $bdd->query("SELECT * FROM oulib_patient WHERE emailP = '" . $email . "'");
 
     $isa = $reponse->rowCount();
     $rep = $val->rowCount();
@@ -96,8 +96,8 @@ if ($fichier == "") {
         $fichier = strtr($fichier, 'Ã€Ã�Ã‚ÃƒÃ„Ã…Ã‡ÃˆÃ‰ÃŠÃ‹ÃŒÃ�ÃŽÃ�Ã’Ã“Ã”Ã•Ã–Ã™ÃšÃ›ÃœÃ�Ã Ã¡Ã¢Ã£Ã¤Ã¥Ã§Ã¨Ã©ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã²Ã³Ã´ÃµÃ¶Ã¹ÃºÃ»Ã¼Ã½Ã¿', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
         $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
         if (move_uploaded_file($_FILES['photo']['tmp_name'], $dossier . $fichier)) {
-            $reponse = $bdd->query("SELECT * FROM infirmiere WHERE emailI = '" . $email . "'");
-            $val = $bdd->query("SELECT * FROM patient WHERE emailP = '" . $email . "'");
+            $reponse = $bdd->query("SELECT * FROM oulib_infirmiere WHERE emailI = '" . $email . "'");
+            $val = $bdd->query("SELECT * FROM oulib_patient WHERE emailP = '" . $email . "'");
 
             $isa = $reponse->rowCount();
             $rep = $val->rowCount();

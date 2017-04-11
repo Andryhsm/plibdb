@@ -126,8 +126,8 @@ include_once "./lib-php/cnx.php";
           
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="./rendez-vous.php">Ma rendez-vous</a></li>
-                      <li><a href="./lib-php/renouvellement.php">Commander matériel</a></li>
+                      <li><a href="./rendez-vous.php">Mes rendez-vous</a></li>
+                      <li><a href="./lib-php/renouvellement.php">Commander du matériel</a></li>
                       <li><a href="./lib-php/modifierprofil_inf.php">Modifier mon profil</a></li>
                       <li><a href="./contact2.html">Contact</a></li>
                       <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
@@ -146,7 +146,7 @@ include_once "./lib-php/cnx.php";
                             <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
 
                             <div class="liste">
-<<<<<<< HEAD
+
                                 <?php
                                 $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
                                 $b = FALSE;
@@ -188,12 +188,7 @@ include_once "./lib-php/cnx.php";
                                     echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
                                 }
                                 ?>
-=======
-                                <table class='table table-hover'>
-                                    <tbody id='content'>
-                                    </tbody>
-                                </table>
->>>>>>> 16520737ede30ccbc74495cda3c7367a07f4cc2f
+
                             </div>
                         </div>
                     </div>
