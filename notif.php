@@ -24,7 +24,10 @@
 						  <div class='panel-body'>
 						    	Votre demande a été annulée par l'infirmière  ".$valny['nomI']."
 						    	<br>
-						    	<div class='pull-right'><a type='button' class='btn btn-default' id='{$data['id']}' onClick='showId({$data['id']});' data-toggle='tooltip' data-placement='right' title='' data-original-title='Tooltip on right'>Marquer comme lue &nbsp;&nbsp;<span class='glyphicon glyphicon-eye-open'></a></span>
+						    		<input type='hidden' class='{$data['id']}' value='{$data['status']}'>
+						    	<div class='pull-right'>
+						    		<a type='button' class='btn btn-default' id='{$data['id']}' onClick='showId({$data['id']});' data-toggle='tooltip' data-placement='right' title='' data-original-title='Tooltip on right'>Vue &nbsp;&nbsp;<span class='glyphicon glyphicon-eye-open'></span>
+						    		</a>
 						    	</div>
 						  </div>
 						</div>");
@@ -38,7 +41,10 @@
 						  <div class='panel-body'>
 								Votre demande vient d'être accéptée par l'infirmière  ".$valny['nomI']."
 						    	<br>
-						    	<div class='pull-right'><a type='button' class='btn btn-default' id='{$data['id']}' onClick='showId({$data['id']});'>Marquer comme lue &nbsp;&nbsp;<span class='glyphicon glyphicon-eye-open'></a></span>
+						    		<input type='hidden' class='{$data['id']}' value='{$data['status']}'>
+						    	<div class='pull-right'>
+						    		<a type='button' class='btn btn-default' id='{$data['id']}' onClick='showId({$data['id']});'>Vue &nbsp;&nbsp;<span class='glyphicon glyphicon-eye-open'></span>
+						    		</a>
 						    	</div>
 						  </div>
 						</div>");

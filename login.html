@@ -17,13 +17,13 @@
 			.alert
 			{
 				position: absolute;
-				top: 35%;
+				top: 25%;
 				left: 5%;
 				z-index: 0;
 				background-color: rgba(84, 46, 90, 0.66);
 				border-radius: 10px;
 				border-color: rgb(84, 46, 90);
-				font-size: 1.4em;
+				font-size: 1.2em;
 			}
 
 			.bg
@@ -47,7 +47,7 @@
 
             li>a:hover
             {
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color:  #fff;
                 text-decoration: none;
             }
@@ -55,7 +55,7 @@
             li>a
             {
                 background-color: transparent;
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color: #fff;
                 text-decoration: none;
             }
@@ -97,7 +97,7 @@
 		<div class="container-fluid">
 			<div class="marge">
 				<div class="alert alert-dismissible alert-info col-lg-5 col-md-6 col-sm-8 col-xs-10">
-					<form class="form-horizontal" method="POST">
+					<form class="form-horizontal" method="POST" id="form">
 					  <fieldset>
 					  	<h2 style="color: #fff; text-align: center;">Accédez à votre compte</h2><br>
 					    <div class="form-group">
@@ -216,6 +216,16 @@
 				}
 					
 			});
+
+
+			$('#form').keyup(function(e) 
+			{    
+			   if(e.keyCode == 13) 
+			   {
+			          $('#connexion').trigger('click'); 
+			   }
+			});
+
 		</script>
 	</body>
 </html>

@@ -82,7 +82,7 @@ include_once "./lib-php/cnx.php";
 
             li>a:hover
             {
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color:  #fff;
                 text-decoration: none;
             }
@@ -90,7 +90,7 @@ include_once "./lib-php/cnx.php";
             li>a
             {
                 background-color: transparent;
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color: #fff;
                 text-decoration: none;
             }

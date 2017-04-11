@@ -63,7 +63,7 @@ $data = $req->fetch();
 
             li>a:hover
             {
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color:  #fff;
                 text-decoration: none;
             }
@@ -71,7 +71,7 @@ $data = $req->fetch();
             li>a
             {
                 background-color: transparent;
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color: #fff;
                 text-decoration: none;
             }
