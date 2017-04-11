@@ -173,7 +173,6 @@ include_once "./lib-php/cnx.php";
     <?php echo($data['commentaire']); ?>
                                                 <br><br><br>
                                                 <div class="pull-right">
-                                                    <a class="btn btn-success itineraire">Itineraire</a>&nbsp;&nbsp
                                                     <a class="btn btn-danger terminer">Terminer</a>
                                                 </div>
                                             </td>
