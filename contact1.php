@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" class="no-js">
     <head>
@@ -19,8 +22,9 @@
         <link rel="stylesheet" id="wds_font-awesome-css" href="./others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
         
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
+        <!--<script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
 
         <script type="text/javascript">
             /* <![CDATA[ */
@@ -28,7 +32,7 @@
             /* ]]> */
         </script>
 
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
+        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>-->
        
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -56,6 +60,37 @@
               padding: 0;
             }
 
+            #alchem-home-sections
+            {
+                padding-top: 50px;
+            }
+
+            .logo
+            {
+                position: absolute;
+                width: 10%;
+                z-index: 9;
+                left: 5%;
+            }
+
+            li>a:hover
+            {
+                font-size: 1.1em;
+                color:  #fff;
+                text-decoration: none;
+            }
+
+            li>a
+            {
+                background-color: transparent;
+                font-size: 1.1em;
+                color: #fff;
+                text-decoration: none;
+            }
+            .modal{
+                margin-top: 5rem;
+            }
+
             #returnOnTop
             {
               display: none;
@@ -65,57 +100,35 @@
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-            <div class="top-wrap">
-                <header class="header-style-1 header-wrap  logo-left">
+
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                      <div class="logo">
+                          <a href="#"><img src="img/logo.png"></a>
+                      </div>
+                  </div>
+          
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="./carte.php">Carte</a></li>
+                      <li><a href="./notification.php"><span id="badges">Notification</span></a></li>
+                      <li><a href="./lib-php/modifierprofil.php">Modifier mon profil</a></li>
+                      <li><a href="./contact1.html">Contact</a></li>
+                      <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            <div class="clear"></div>
 
 
-                    <div class="main-header " style="display: block;">
-                        <div class="container">
-                            <div class="logo-box alchem_header_style alchem_default_logo">
-                                <a href="#">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                </a>
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
-                    <!-- sticky header -->
-                    <div class="fxd-header logo-left" style="top: 0px; display: none;">
-                        <div class="container">
-                            <div class="logo-box text-left alchem_header_style alchem_default_logo">
-                                <a href="#">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                </a>
-                                
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./carte.php"><span class="menu-item-label">Carte</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact1.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </header>  </div>
             <div id="alchem-home-sections">
 
                 <section class="section magee-section alchem-home-section-1 alchem-home-style-0" id="section-2">
@@ -164,6 +177,7 @@
                                                     <label for="sujet" class="col-sm-3 control-label">Sujet:</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" placeholder="sujet" class="form-control" name="sujet" id="sujet">
+                                                        <input type="hidden" id="emailP" value="<?php echo($_SESSION['email']); ?>">
                                                     </div>
                                                 </div>
                                                 <br>
@@ -233,7 +247,6 @@
             var alchem_params = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "themeurl": "http:\/\/localhost\/wordpress\/wp-content\/themes\/alchem", "responsive": "yes", "site_width": "1170px", "sticky_header": "yes", "show_search_icon": "yes", "slider_autoplay": "yes", "slideshow_speed": "3000", "portfolio_grid_pagination_type": "pagination", "blog_pagination_type": "pagination", "global_color": "#fdd200", "admin_ajax_nonce": "2ed3a22947", "admin_ajax": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "isMobile": "0", "footer_sticky": "0"};
             /* ]]> */
                     </script>
-                    <script type="text/javascript" src="./others/main.js.téléchargement"></script>
                         <script type="text/javascript">
                           $(document).ready( function () 
                           {
@@ -251,6 +264,26 @@
                               else
                                   $('#returnOnTop').fadeIn();
                           });
+                            var auto_refresh = setInterval(
+                                function() 
+                                {
+                                    var status = "lu";
+                                    var email = $('#emailP').val();
+
+                                    $.ajax({
+                                        url: "badges.php",
+                                        type: "POST",
+                                        data: "email="+email,
+                                        success: function(server_response) 
+                                        {  
+                                            $('#badges').html(server_response);
+                                        },
+                                        error: function(server_response) 
+                                        {  
+                                          alert('Erreur :' + server_response);
+                                        }
+                                    });
+                                }, 1000);
                         </script>
 
                         <script type="text/javascript">

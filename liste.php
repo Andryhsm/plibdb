@@ -11,7 +11,6 @@ include_once "./lib-php/cnx.php";
 <html lang="fr-FR" class="no-js">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <META http-equiv="REFRESH" content="20">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -27,17 +26,7 @@ include_once "./lib-php/cnx.php";
         <link rel="stylesheet" id="wds_font-awesome-css" href="./others/font-awesome(1).css" type="text/css" media="all">
         <link rel="stylesheet" id="wonderplugin-slider-css-css" href="./others/wonderpluginsliderengine.css" type="text/css" media="all">
         <link rel="stylesheet" id="parent-style-css" href="./others/style.css" type="text/css" media="all">
-
-        <script type="text/javascript" src="./others/jquery.js.téléchargement"></script>
-
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            var object = {"ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php"};
-            /* ]]> */
-        </script>
-
-        <script src="js/jssor.slider-22.2.10.min.js" type="text/javascript"></script>
-
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/paper.css">
 
         <!-- Meta OG tags by Kiwi Social Sharing Plugin -->
         <meta property="og:type" content="article"> 
@@ -76,6 +65,40 @@ include_once "./lib-php/cnx.php";
                 bottom: 0;
                 width: 100%;
             }
+
+                    
+            #alchem-home-sections
+            {
+                padding-top: 50px;
+            }
+
+            .logo
+            {
+                position: absolute;
+                width: 10%;
+                z-index: 9;
+                left: 5%;
+            }
+
+            li>a:hover
+            {
+                font-size: 1.1em;
+                color:  #fff;
+                text-decoration: none;
+            }
+
+            li>a
+            {
+                background-color: transparent;
+                font-size: 1.1em;
+                color: #fff;
+                text-decoration: none;
+            }
+            .modal{
+                margin-top: 5rem;
+            }
+
+
             .liste
             {
                 width: 100%;
@@ -87,67 +110,43 @@ include_once "./lib-php/cnx.php";
         </style></head>
     <body class="home page-template page-template-template-frontpage page-template-template-frontpage-php page page-id-40 has-slider">
         <div class="wrapper ">
-            <div class="top-wrap">
-                <header class="header-style-1 header-wrap  logo-left">
-
-
-                    <div class="main-header " style="display: block;">
-                        <div class="container">
-                            <div class="logo-box alchem_header_style alchem_default_logo">
-                                <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./rendez-vous.php"><span class="menu-item-label">Ma rendez-vous</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
-                    <!-- sticky header -->
-                    <div class="fxd-header logo-left" style="top: 0px; display: none;">
-                        <div class="container">
-                            <div class="logo-box text-left alchem_header_style alchem_default_logo">
-                                <a href="#">
-                                    <img class="site-logo normal_logo" alt="" src="./others/Logo-ousoft-HD.png">
-                                </a>
-
-                            </div>
-                            <button class="site-nav-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <i class="fa fa-bars fa-2x"></i>
-                            </button>
-                            <nav class="site-nav" role="navigation" style="">
-                                <ul id="menu-main1" class="main-nav">
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./rendez-vous.php"><span class="menu-item-label">Mon rendez-vous</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/renouvellement.php"><span class="menu-item-label">Commander matériel</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/modifierprofil_inf.php"><span class="menu-item-label">Modifier mon profil</span></a></li>
-                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./contact2.html"><span class="menu-item-label">Contact</span></a></li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a href="./lib-php/deconnexion.php"><span class="menu-item-label">Deconnexion</span></a></li>
-                                </ul>                    
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </header>  
-            </div>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                      <div class="logo">
+                          <a href="#"><img src="img/logo.png"></a>
+                      </div>
+                  </div>
+          
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="./rendez-vous.php">Ma rendez-vous</a></li>
+                      <li><a href="./lib-php/renouvellement.php">Commander matériel</a></li>
+                      <li><a href="./lib-php/modifierprofil_inf.php">Modifier mon profil</a></li>
+                      <li><a href="./contact2.html">Contact</a></li>
+                      <li><a href="./lib-php/deconnexion.php">Deconnexion</a></li>
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            <div class="clear"></div>
+ 
             <div id="alchem-home-sections">
 
 
                 <section class="section magee-section alchem-home-section-4 alchem-home-style-0" id="section-5">
                     <div class="section-content">
                         <div class="container alchem_section_4_model">
+                            <input class="hidden" name="emailP" id="emailP" value="<?php echo($_SESSION['email'] ); ?>" readonly>
 
                             <div class="liste">
+<<<<<<< HEAD
                                 <?php
                                 $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
                                 $b = FALSE;
@@ -189,6 +188,12 @@ include_once "./lib-php/cnx.php";
                                     echo '<center><h3>Vous n\'avez pas encore de demande</h3></center>';
                                 }
                                 ?>
+=======
+                                <table class='table table-hover'>
+                                    <tbody id='content'>
+                                    </tbody>
+                                </table>
+>>>>>>> 16520737ede30ccbc74495cda3c7367a07f4cc2f
                             </div>
                         </div>
                     </div>
@@ -228,19 +233,12 @@ include_once "./lib-php/cnx.php";
             </footer>
         </div>  
         <script type="text/javascript" src="./js/jquery.js"></script>
-        <<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="./others/owl.carousel.min.js.téléchargement"></script>
-        <script type="text/javascript" src="./others/main.js.téléchargement"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            $('.table').on('click', '.accepter', function (e) {
-                e.preventDefault();
-
-                var a = $(this);
-                var id = a.parents('tr').attr('class');
-
+            function accepter(id)
+            {
                 var status = "accepter";
-                var dataString = "id=" + id + "&status=" + status;
-
+                var dataString = "id="+id+"&status="+status;
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     url: 'lib-php/edit.php', // the url where we want to POST
@@ -268,16 +266,12 @@ include_once "./lib-php/cnx.php";
                         alert(server_response);
                     }
                 });
-            });
-            $('.table').on('click', '.refuser', function (e) {
-                e.preventDefault();
+            };
 
-                var a = $(this);
-                var id = a.parents('tr').attr('class');
-
+            function refuser(id)
+            {
                 var status = "refuser";
-                var dataString = "id=" + id + "&status=" + status;
-
+                var dataString = "id="+id+"&status="+status;
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     url: 'lib-php/edit.php', // the url where we want to POST
@@ -305,7 +299,8 @@ include_once "./lib-php/cnx.php";
                         alert(server_response);
                     }
                 });
-            });
+            };
+
             $(document).ready(function ()
             {
                 $('#returnOnTop').hide();
@@ -313,6 +308,25 @@ include_once "./lib-php/cnx.php";
                     //e.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
+                var refresh_auto = setInterval(
+                    function() 
+                    {
+                        var email = $('#emailP').val();
+
+                        $.ajax({
+                            url: "notif_inf.php",
+                            type: "POST",
+                            data: "email="+email,
+                            success: function(server_response) 
+                            {  
+                                $('#content').html(server_response);
+                            },
+                            error: function(server_response) 
+                            {  
+                              alert('Erreur :' + server_response);
+                            }
+                        });
+                    }, 2000);
             });
 
             $(window).scroll(function ()

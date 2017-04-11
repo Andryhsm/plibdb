@@ -23,13 +23,13 @@ $(document).ready(function() {
 					}
 				}
 					    
-				if (s == "Transporteur - 24h France express" || s == "Transporteur - (24h) Chronopost" || s == "Transporteur - voie postale (48h - Colissimo)" || s == "Chrono Relais (Relais colis près de votre domicile)" || s == "Courrier") 
+				if (s == "Equipe Medsoft" || s == "Transporteur - 24h France express" || s == "Transporteur - (24h) Chronopost" || s == "Transporteur - voie postale (48h - Colissimo)" || s == "Chrono Relais (Relais colis près de votre domicile)" || s == "Courrier") 
 				{
 					$('#heureL').show(500);
 					$('#livreur').show(500);
 					return [(day == 1 || day == 2 || day == 3 || day == 4 || day == 5 || day == 6), ''];
 				}
-				else
+				/*else
 				{
 					    
                     if (value == "Paris 75") 
@@ -98,7 +98,7 @@ $(document).ready(function() {
 						$('#livreur').show(500);	
                         return [(day == 1 || day == 2 || day == 3 || day == 4 || day == 5 || day == 6 ), ''];						
                     }
-				}
+				}*/
                                                    					
         }
 
