@@ -162,7 +162,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 margin-left: 60%;
 
             }
-            .modal-header {
+            .modal-header-infirmier {
                 text-align: center;
                 padding: 15px;
                 border-bottom: 1px solid transparent;
@@ -170,7 +170,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 border: 1px solid white;
                 color: white;
             }
-            .modal-title {
+            .modal-title-infirmier {
                 color: white;
             }
             .info {
@@ -191,6 +191,14 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
             #alchem-home-sections
             {
                 padding-top: 60px;
+            }
+
+            #dmd_deja_envoyer {
+                background: #e95e5e;
+                font-size: 1.2em;
+                color: white;
+                width: 100%;
+                height: 19%;
             }
 
 
@@ -233,11 +241,11 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 <div class="modal fade" id="modal-id">
                     <div class="modal-dialog" style="margin:0%; height: 100vh;">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header-infirmier">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">INFIRMIERE LIBERALE</h4>
+                                <h4 class="modal-title modal-title-infirmier">INFIRMIERE LIBERALE</h4>
                             </div>
-                            <div class="modal-body" >
+                            <div class="modal-body modal-body-infirmier" >
                                 <div class="warning" id="infoI"></div>    
                             </div>
                             <div class="modal-footer">
@@ -315,11 +323,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
         <script type="text/javascript">
-
-            $('.dp3').datepicker({
-                    autoclose: true
-            });
-
             var map;
             var tab_marqueur = [];
             function initMap() {
@@ -482,9 +485,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
                             }, 40000);
-
-                            //$("#closeMI").trigger('click');
-                        } else if (data === "existe") {
+                    } else if (data === "existe") {
                             var nom = $('#nomInfirmier').html();
 
                             $('#info').html('<p> Votre demande à <strong>' + nom + '</strong> est dejà envoyer !</p>');
@@ -492,7 +493,6 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                             setTimeout(function () {
                                 $('#ferme').trigger('click');
                             }, 40000);
-                            //$("#closeMI").trigger('click');
                         } else {
                             alert("Une erreur de requete dans rendez-vous.php");
                         }
@@ -589,8 +589,8 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                 p2 += "<p><strong>Type de soin : </strong> " + infirmier.type_soinI1 + " - " + infirmier.type_soinI2 + " - " + infirmier.type_soinI3 + " - " + infirmier.type_soinI4 + "</p>";
                 p2 += "<p><strong>Lieu d'intervention : " + infirmier.lieu_intervention + "</strong></p>";
                 p2 += "</div>";
-                p2 += "<div class='col-lg-12'>";
-                p2 += "<center><input type='submit' class='btn btn-primary' name='rdv' value='Demande dejà envoyer'/></center>";
+                p2 += "<div id='dmd_deja_envoyer' class='col-lg-12'>";
+                p2 += "<center>Demande dejà envoyer. </center>";
                 p2 += "</div>";
                 p2 += "</div>";
 
@@ -612,15 +612,12 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                         type: 'GET',
                         success: function (data) {
                             if (data === "inexiste") {
-                                //     alert("Demande est inexiste");
-                                $('.modal-body').html(encode_utf8(p));
+                                $('.modal-body-infirmier').html(p);
                                 $('#triggerwarningI').trigger('click');
 
                             } else if (data === "existe") {
-                                $('.modal-body').html(encode_utf8(p2));
+                                $('.modal-body-infirmier').html(p2);
                                 $('#triggerwarningI').trigger('click');
-
-                                //alert("La demande est existe ! ");
                             } else {
                                 alert("Une erreur php dans savoir_demande.php");
                             }
