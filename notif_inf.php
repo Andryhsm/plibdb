@@ -44,16 +44,19 @@
         {
             while ($data = $req->fetch()) 
             {
+                $heures = explode(':', $data['heure_soin']);
+                $heure = $heures[0].":".$heures[1];
                 echo("
                     <tr class='{$data['id']}'>
                         <td width='15%'>
                             <img class='thumbnail img-responsive' style='vertical-align: center;' width='130px' src='./image-person/{$data["photo"]}'>
                         </td>
                         <td width='45%'>
-                            <h4><b> {$data['nomP']} {$data['prenomP']} {$data['id']}</b></h4>
+                            <h4><b> {$data['nomP']} {$data['prenomP']}</b></h4>
                             {$data['telP']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$data['emailP']}<br>
                             <b>Type de soin:</b> {$data['typeSoinP']}<br>
-                            <b>Heure de soin:</b> {$data['date']}<br>
+                            <b>Date de soin:</b> {$data['date_soin']}<br>
+                            <b>Heure de soin:</b> {$heure}<br>
                             <b>Fréquence de soin:</b> {$data['frequenceSoin']}
                         </td>
                         <td width='40%'>
