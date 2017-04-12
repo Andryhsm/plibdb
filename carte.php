@@ -328,6 +328,30 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
                     zoom: 13
                 });
 
+                //Affichage des infirmiers sur la carte
+                $.ajax({
+                    url: 'lib-php/infirmier_json.php',
+                    type: 'GET',
+                    success: function (data) {
+                        var json = $.parseJSON(data);
+                        for (var i = json.length - 1; i >= 0; i--) {
+                            var infirmier = $.parseJSON(json[i]);
+
+                            if (typeof infirmier.latLng != "undefined") {
+                                latLng = infirmier.latLng.replace('(', '');
+                                latLng = latLng.replace(')', '');
+                                var latLng = latLng.split(',');
+                                var pos = new google.maps.LatLng(latLng[0], latLng[1]);
+
+                                afficher_marqueur(map, infirmier, pos);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert("Une erreur de recuperation des données ! ");
+                    }
+                });
+
                 // Try HTML5 geolocation.
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
@@ -442,28 +466,7 @@ if ((!isset($_SESSION['email'])) || (empty($_SESSION['email']))) {
 
 
             jQuery(document).ready(function ($) {
-                $.ajax({
-                    url: 'lib-php/infirmier_json.php',
-                    type: 'GET',
-                    success: function (data) {
-                        var json = $.parseJSON(data);
-                        for (var i = json.length - 1; i >= 0; i--) {
-                            var infirmier = $.parseJSON(json[i]);
-
-                            if (typeof infirmier.latLng != "undefined") {
-                                latLng = infirmier.latLng.replace('(', '');
-                                latLng = latLng.replace(')', '');
-                                var latLng = latLng.split(',');
-                                var pos = new google.maps.LatLng(latLng[0], latLng[1]);
-
-                                afficher_marqueur(map, infirmier, pos);
-                            }
-                        }
-                    },
-                    error: function () {
-                        alert("Une erreur de recuperation des données ! ");
-                    }
-                });
+               
             });
             function rendezVous(emailI) {
                 var commentaire = encodeURIComponent($("#commentaire").val());
