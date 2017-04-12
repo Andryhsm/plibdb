@@ -151,36 +151,11 @@ include_once "./lib-php/cnx.php";
                                 $req = $bdd->query("SELECT * FROM oulib_liste_demande WHERE emailI = '" . $_SESSION['email'] . "' AND status = 'attente'");
                                 $b = FALSE;
                                 while ($data = $req->fetch()) {
+                                    $b = TRUE;
                                     ?>
                                     <table class="table table-hover">
                                         <tbody id="content">
-                                            <tr class="<?php $b = TRUE;
-                                echo($data['id']); ?>">
-                                                <td width='15%'>
-                                                    <img class="thumbnail img-responsive" style="vertical-align: center;" width="130px" src="./image-person/<?php echo($data['photo']); ?>">
-                                                </td>
-                                                <td width='45%'>
-                                                    <?php echo "<h4><b>" . $data['nomP'] . " " . $data['prenomP'] . "</b></h4>"; ?>
-                                                    <?php echo($data['telP']); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo($data['emailP']); ?><br>
-                                                    <b>Type de soin:</b> <?php echo($data['typeSoinP']); ?> <br>
-                                                    <?php 
-                                                            $heures = explode(':', $data['heure_soin']);
-                                                            $heure = $heures[0].":".$heures[1]; 
-                                                    ?>
-                                                    <b>Date de soin:</b>  <?php echo($data['date_soin']); ?> <br>
-                                                    <b>Heure de soin:</b> <?php echo($heure); ?> <br>
-                                                    <b>Fréquence de soin:</b> <?php echo($data['frequenceSoin']); ?>
-                                                </td>
-                                                <td width='40%'>
-                                                    <br><br>
-    <?php echo($data['commentaire']); ?>
-                                                    <br><br><br>
-                                                    <div class="pull-right">
-                                                        <a class="btn btn-success accepter">Accepter</a>&nbsp;&nbsp
-                                                        <a class="btn btn-danger refuser">Réfuser</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                     <?php
